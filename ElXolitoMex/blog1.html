@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cómo cuidar tu joyería de plata .925 | El Xolito Mex</title>
+    <meta name="description" content="Aprende los secretos para mantener el brillo y la belleza de tus piezas de plata. Consejos profesionales para que duren toda la vida." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <!-- Header igual que en blog.html -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/" aria-label="El Xolito Mex">
+          <img src="/assets/logo.svg" alt="El Xolito Mex" class="brand-logo" />
+          <span class="brand-text">El Xolito Mex</span>
+        </a>
+        <nav class="nav" aria-label="Principal">
+          <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+          <ul class="nav-list">
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/tienda.html">Tienda</a></li>
+            <li><a href="/#ofertas">Ofertas</a></li>
+            <li><a href="/blog.html" class="active">Blog</a></li>
+            <li><a href="/#historia">Historia</a></li>
+            <li><a href="/#nosotros">Nosotros</a></li>
+            <li><a href="/#contacto">Contacto</a></li>
+          </ul>
+        </nav>
+        <div class="header-actions">
+          <div class="auth-buttons">
+            <button class="btn btn-outline btn-sm" onclick="openLoginModal()">Iniciar Sesión</button>
+            <button class="btn btn-primary btn-sm" onclick="openRegisterModal()">Registrarse</button>
+          </div>
+          <button class="cart-toggle" aria-label="Ver carrito" data-count="0">
+            🛒
+          </button>
+        </div>
+      </div>
+      <div class="border-mex"></div>
+    </header>
+
+    <main>
+      <section class="blog-hero">
+        <div class="container">
+          <h1 class="display">Cómo cuidar tu joyería de plata .925</h1>
+          <p class="lead">Aprende los secretos para mantener el brillo y la belleza de tus piezas de plata. Consejos profesionales para que duren toda la vida.</p>
+        </div>
+      </section>
+
+      <section class="blog-content">
+        <div class="container">
+          <article class="blog-post blog-detail">
+            <div class="post-meta">
+              <span class="post-date">8 Enero 2024</span>
+              <span class="post-category">Cuidado</span>
+            </div>
+            <h2 class="post-title">Cómo cuidar tu joyería de plata .925</h2>
+            <h3 class="blog-subtitle">Consejos profesionales para mantener el brillo y la belleza de tus piezas</h3>
+            <div class="blog-content-row">
+              <div class="blog-text">
+                <p>La plata .925 es un material noble, pero requiere ciertos cuidados para mantener su brillo y belleza. Aquí te compartimos los mejores consejos para que tus piezas luzcan siempre como nuevas.</p>
+                <p>Evita el contacto con productos químicos, perfumes y agua salada. Guarda tu joyería en un lugar seco y utiliza bolsas herméticas para evitar la oxidación.</p>
+              </div>
+              <div class="blog-image">
+                <img src="/assets/img.jpeg" alt="Cuidado de joyería de plata">
+              </div>
+            </div>
+            <img class="blog-image-full" src="/assets/img.jpeg" alt="Plata brillante">
+            <h4 class="blog-section-title">Tips esenciales</h4>
+            <ul>
+              <li>Límpiala regularmente con un paño suave</li>
+              <li>Guárdala en bolsas herméticas</li>
+              <li>Evita el agua y perfumes</li>
+            </ul>
+            <p>Así tus piezas lucirán como nuevas por mucho más tiempo. Recuerda que el cuidado adecuado prolonga la vida y el brillo de tu joyería favorita.</p>
+            <a href="/blog.html" class="btn btn-outline btn-back">← Volver al blog</a>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer igual que en blog.html -->
+    <footer class="site-footer">
+      <div class="border-mex"></div>
+      <div class="container footer-content">
+        <!-- ...tu footer aquí... -->
+      </div>
+    </footer>
+
+    <!-- Modals igual que en blog.html -->
+    <div id="loginModal" class="auth-modal" aria-hidden="true">
+      <!-- ... -->
+    </div>
+    <div id="registerModal" class="auth-modal" aria-hidden="true">
+      <!-- ... -->
+    </div>
+    <div id="cartModal" class="cart-modal" aria-hidden="true">
+      <!-- ... -->
+    </div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog – El Xolito Mex</title>
+    <meta name="description" content="Descubre las últimas tendencias en joyería mexicana y consejos de cuidado." />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/" aria-label="El Xolito Mex">
+          <img src="/assets/logo.svg" alt="El Xolito Mex" class="brand-logo" />
+          <span class="brand-text">El Xolito Mex</span>
+        </a>
+        <nav class="nav" aria-label="Principal">
+          <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+          <ul class="nav-list">
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/tienda.html">Tienda</a></li>
+            <li><a href="/#ofertas">Ofertas</a></li>
+            <li><a href="/blog.html" class="active">Blog</a></li>
+            <li><a href="/#historia">Historia</a></li>
+            <li><a href="/#nosotros">Nosotros</a></li>
+            <li><a href="/#contacto">Contacto</a></li>
+          </ul>
+        </nav>
+        <div class="header-actions">
+          <div class="auth-buttons">
+            <button class="btn btn-outline btn-sm" onclick="openLoginModal()">Iniciar Sesión</button>
+            <button class="btn btn-primary btn-sm" onclick="openRegisterModal()">Registrarse</button>
+          </div>
+          <button class="cart-toggle" aria-label="Ver carrito" data-count="0">
+            🛒
+          </button>
+        </div>
+      </div>
+      <div class="border-mex"></div>
+    </header>
+
+    <main>
+      <section class="blog-hero">
+        <div class="container">
+          <h1 class="display">Blog</h1>
+          <p class="lead">Descubre el mundo de la joyería mexicana, tendencias y consejos de cuidado</p>
+        </div>
+      </section>
+
+      <section class="blog-content">
+        <div class="container">
+          <div class="blog-grid">
+            <article class="blog-post">
+              <div class="post-image">
+                <div class="post-placeholder">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250">
+                    <defs>
+                      <linearGradient id="blog2" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0" stop-color="#e7509d"/>
+                        <stop offset="1" stop-color="#2e694f"/>
+                      </linearGradient>
+                    </defs>
+                    <rect width="400" height="250" fill="url(#blog2)"/>
+                    <circle cx="300" cy="60" r="12" fill="#e8d79c"/>
+                    <path d="M40 150 L100 80 L160 150 L220 100 L300 150" fill="none" stroke="#e8d79c" stroke-width="6" stroke-linecap="round"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="post-content">
+                <div class="post-meta">
+                  <span class="post-date">8 Enero 2024</span>
+                  <span class="post-category">Cuidado</span>
+                </div>
+                <h3 class="post-title">Cómo cuidar tu joyería de plata .925</h3>
+                <p class="post-excerpt">Aprende los secretos para mantener el brillo y la belleza de tus piezas de plata. Consejos profesionales para que duren toda la vida.</p>
+                <a href="blog1.html" class="btn btn-outline">Leer más</a>
+              </div>
+            </article>
+
+            <article class="blog-post">
+              <div class="post-image">
+                <div class="post-placeholder">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250">
+                    <defs>
+                      <linearGradient id="blog3" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0" stop-color="#2a868f"/>
+                        <stop offset="1" stop-color="#e7509d"/>
+                      </linearGradient>
+                    </defs>
+                    <rect width="400" height="250" fill="url(#blog3)"/>
+                    <circle cx="280" cy="70" r="10" fill="#e8d79c"/>
+                    <path d="M30 140 L90 70 L150 140 L210 90 L280 140" fill="none" stroke="#e8d79c" stroke-width="5" stroke-linecap="round"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="post-content">
+                <div class="post-meta">
+                  <span class="post-date">2 Enero 2024</span>
+                  <span class="post-category">Historia</span>
+                </div>
+                <h3 class="post-title">La tradición joyera de México: De los aztecas al minimalismo</h3>
+                <p class="post-excerpt">Un viaje a través de la rica historia de la joyería mexicana, desde las técnicas ancestrales hasta nuestros diseños contemporáneos.</p>
+                <a href="blog2.html" class="btn btn-outline">Leer más</a>
+              </div>
+            </article>
+
+            <article class="blog-post">
+              <div class="post-image">
+                <div class="post-placeholder">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250">
+                    <defs>
+                      <linearGradient id="blog2" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0" stop-color="#e7509d"/>
+                        <stop offset="1" stop-color="#2e694f"/>
+                      </linearGradient>
+                    </defs>
+                    <rect width="400" height="250" fill="url(#blog2)"/>
+                    <circle cx="300" cy="60" r="12" fill="#e8d79c"/>
+                    <path d="M40 150 L100 80 L160 150 L220 100 L300 150" fill="none" stroke="#e8d79c" stroke-width="6" stroke-linecap="round"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="post-content">
+                <div class="post-meta">
+                  <span class="post-date">8 Enero 2024</span>
+                  <span class="post-category">Cuidado</span>
+                </div>
+                <h3 class="post-title">Cómo cuidar tu joyería de plata .925</h3>
+                <p class="post-excerpt">Aprende los secretos para mantener el brillo y la belleza de tus piezas de plata. Consejos profesionales para que duren toda la vida.</p>
+                <a href="blog3.html" class="btn btn-outline">Leer más</a>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="border-mex"></div>
+      <div class="container footer-content">
+        <div class="footer-main">
+          <div class="footer-brand">
+            <a class="brand" href="/">
+              <img src="/assets/logo.svg" alt="El Xolito Mex" class="brand-logo" />
+              <span class="brand-text">El Xolito Mex</span>
+            </a>
+            <p class="footer-description">Joyería mexicana minimalista hecha a mano. Cada pieza cuenta una historia única.</p>
+            <div class="social-links">
+              <a href="#" aria-label="Instagram">📷</a>
+              <a href="#" aria-label="Facebook">📘</a>
+              <a href="#" aria-label="WhatsApp">💬</a>
+            </div>
+          </div>
+          <div class="footer-links">
+            <div class="footer-column">
+              <h4>Tienda</h4>
+              <ul>
+                <li><a href="/tienda.html">Todos los productos</a></li>
+                <li><a href="/#ofertas">Ofertas</a></li>
+                <li><a href="/tienda.html?filter=anillos">Anillos</a></li>
+                <li><a href="/tienda.html?filter=aretes">Aretes</a></li>
+                <li><a href="/tienda.html?filter=collares">Collares</a></li>
+                <li><a href="/tienda.html?filter=pulseras">Pulseras</a></li>
+              </ul>
+            </div>
+            <div class="footer-column">
+              <h4>Empresa</h4>
+              <ul>
+                <li><a href="/#historia">Nuestra historia</a></li>
+                <li><a href="/#nosotros">Nosotros</a></li>
+                <li><a href="/blog.html">Blog</a></li>
+                <li><a href="/#contacto">Contacto</a></li>
+              </ul>
+            </div>
+            <div class="footer-column">
+              <h4>Atención</h4>
+              <ul>
+                <li><a href="#">Preguntas frecuentes</a></li>
+                <li><a href="#">Envíos y devoluciones</a></li>
+                <li><a href="#">Cuidado de joyas</a></li>
+                <li><a href="#">Garantía</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p class="foot-note">© <span id="year"></span> El Xolito Mex. Todos los derechos reservados.</p>
+          <div class="footer-legal">
+            <a href="#">Términos y condiciones</a>
+            <a href="#">Política de privacidad</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="auth-modal" aria-hidden="true">
+      <div class="auth-overlay"></div>
+      <div class="auth-dialog">
+        <div class="auth-header">
+          <h3>Iniciar Sesión</h3>
+          <button class="auth-close" aria-label="Cerrar">×</button>
+        </div>
+        <div class="auth-content">
+          <form class="auth-form">
+            <div class="form-group">
+              <label for="loginEmail">Email</label>
+              <input type="email" id="loginEmail" required>
+            </div>
+            <div class="form-group">
+              <label for="loginPassword">Contraseña</label>
+              <input type="password" id="loginPassword" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+          </form>
+          <p class="auth-switch">¿No tienes cuenta? <a href="#" onclick="switchToRegister()">Regístrate aquí</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="auth-modal" aria-hidden="true">
+      <div class="auth-overlay"></div>
+      <div class="auth-dialog">
+        <div class="auth-header">
+          <h3>Crear Cuenta</h3>
+          <button class="auth-close" aria-label="Cerrar">×</button>
+        </div>
+        <div class="auth-content">
+          <form class="auth-form">
+            <div class="form-group">
+              <label for="registerName">Nombre completo</label>
+              <input type="text" id="registerName" required>
+            </div>
+            <div class="form-group">
+              <label for="registerEmail">Email</label>
+              <input type="email" id="registerEmail" required>
+            </div>
+            <div class="form-group">
+              <label for="registerPassword">Contraseña</label>
+              <input type="password" id="registerPassword" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Crear Cuenta</button>
+          </form>
+          <p class="auth-switch">¿Ya tienes cuenta? <a href="#" onclick="switchToLogin()">Inicia sesión aquí</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="cart-modal" aria-hidden="true">
+      <div class="cart-overlay"></div>
+      <div class="cart-drawer">
+        <div class="cart-header">
+          <h3>Tu carrito</h3>
+          <button class="cart-close" aria-label="Cerrar carrito">×</button>
+        </div>
+        <div class="cart-content">
+          <div id="cartItems" class="cart-items"></div>
+          <div class="cart-empty">
+            <p>Tu carrito está vacío</p>
+            <a href="/tienda.html" class="btn btn-primary">Ir a la tienda</a>
+          </div>
+        </div>
+        <div class="cart-footer">
+          <div class="cart-total">
+            <span>Total: <strong id="cartTotal">$0</strong></span>
+          </div>
+          <button class="btn btn-primary cart-checkout" disabled>Proceder al pago</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>

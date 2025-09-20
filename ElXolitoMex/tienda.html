@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tienda – El Xolito Mex</title>
+    <meta name="description" content="Descubre nuestra colección completa de joyería mexicana minimalista." />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/" aria-label="El Xolito Mex">
+          <img src="/assets/logo.svg" alt="El Xolito Mex" class="brand-logo" />
+          <span class="brand-text">El Xolito Mex</span>
+        </a>
+        <nav class="nav" aria-label="Principal">
+          <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+          <ul class="nav-list">
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/tienda.html" class="active">Tienda</a></li>
+            <li><a href="/#ofertas">Ofertas</a></li>
+            <li><a href="/blog.html">Blog</a></li>
+            <li><a href="/#historia">Historia</a></li>
+            <li><a href="/#nosotros">Nosotros</a></li>
+            <li><a href="/#contacto">Contacto</a></li>
+          </ul>
+        </nav>
+        <div class="header-actions">
+          <div class="auth-buttons">
+            <button class="btn btn-outline btn-sm" onclick="openLoginModal()">Iniciar Sesión</button>
+            <button class="btn btn-primary btn-sm" onclick="openRegisterModal()">Registrarse</button>
+          </div>
+          <button class="cart-toggle" aria-label="Ver carrito" data-count="0">
+            🛒
+          </button>
+        </div>
+      </div>
+      <div class="border-mex"></div>
+    </header>
+
+    <main>
+      <section class="shop-hero">
+        <div class="container">
+          <h1 class="display">Todas las colecciones</h1>
+          <p class="lead">Descubre nuestra joyería mexicana organizada por categorías</p>
+        </div>
+      </section>
+
+      <section class="categories">
+        <div class="container">
+          <div class="categories-grid">
+            <div class="category-card" data-category="anillos">
+              <div class="category-image">
+                <div class="category-placeholder">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+                    <defs>
+                      <linearGradient id="cat1" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0" stop-color="#e8d79c"/>
+                        <stop offset="1" stop-color="#2a868f"/>
+                      </linearGradient>
+                    </defs>
+                    <rect width="400" height="300" fill="url(#cat1)"/>
+                    <circle cx="320" cy="80" r="15" fill="#e63f46"/>
+                    <path d="M50 200 L120 120 L180 200 L240 140 L320 200" fill="none" stroke="#2e694f" stroke-width="8" stroke-linecap="round"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="category-content">
+                <h3>Anillos</h3>
+                <p>Piezas únicas para tus dedos</p>
+                <button class="btn btn-primary">Ver productos</button>
+              </div>
+            </div>
+
+            <div class="category-card" data-category="aretes">
+              <div class="category-image">
+                <div class="category-placeholder">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+                    <defs>
+                      <linearGradient id="cat2" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0" stop-color="#e7509d"/>
+                        <stop offset="1" stop-color="#2e694f"/>
+                      </linearGradient>
+                    </defs>
+                    <rect width="400" height="300" fill="url(#cat2)"/>
+                    <circle cx="320" cy="80" r="15" fill="#e8d79c"/>
+                    <path d="M50 200 L120 120 L180 200 L240 140 L320 200" fill="none" stroke="#e8d79c" stroke-width="8" stroke-linecap="round"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="category-content">
+                <h3>Aretes y Arracadas</h3>
+                <p>Elegantes adornos para tus orejas</p>
+                <button class="btn btn-primary">Ver productos</button>
+              </div>
+            </div>
+
+            <div class="category-card" data-category="collares">
+              <div class="category-image">
+                <div class="category-placeholder">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+                    <defs>
+                      <linearGradient id="cat3" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0" stop-color="#2a868f"/>
+                        <stop offset="1" stop-color="#e7509d"/>
+                      </linearGradient>
+                    </defs>
+                    <rect width="400" height="300" fill="url(#cat3)"/>
+                    <circle cx="320" cy="80" r="15" fill="#e8d79c"/>
+                    <path d="M50 200 L120 120 L180 200 L240 140 L320 200" fill="none" stroke="#e8d79c" stroke-width="8" stroke-linecap="round"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="category-content">
+                <h3>Collares</h3>
+                <p>Declaraciones de estilo únicas</p>
+                <button class="btn btn-primary">Ver productos</button>
+              </div>
+            </div>
+
+            <div class="category-card" data-category="pulseras">
+              <div class="category-image">
+                <div class="category-placeholder">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+                    <defs>
+                      <linearGradient id="cat4" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0" stop-color="#2e694f"/>
+                        <stop offset="1" stop-color="#e8d79c"/>
+                      </linearGradient>
+                    </defs>
+                    <rect width="400" height="300" fill="url(#cat4)"/>
+                    <circle cx="320" cy="80" r="15" fill="#e63f46"/>
+                    <path d="M50 200 L120 120 L180 200 L240 140 L320 200" fill="none" stroke="#e63f46" stroke-width="8" stroke-linecap="round"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="category-content">
+                <h3>Pulseras</h3>
+                <p>Accesorios para tus muñecas</p>
+                <button class="btn btn-primary">Ver productos</button>
+              </div>
+            </div>
+
+            <div class="category-card" data-category="dijes">
+              <div class="category-image">
+                <div class="category-placeholder">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+                    <defs>
+                      <linearGradient id="cat5" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0" stop-color="#e63f46"/>
+                        <stop offset="1" stop-color="#e7509d"/>
+                      </linearGradient>
+                    </defs>
+                    <rect width="400" height="300" fill="url(#cat5)"/>
+                    <circle cx="320" cy="80" r="15" fill="#e8d79c"/>
+                    <path d="M50 200 L120 120 L180 200 L240 140 L320 200" fill="none" stroke="#e8d79c" stroke-width="8" stroke-linecap="round"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="category-content">
+                <h3>Dijes</h3>
+                <p>Pequeños tesoros con significado</p>
+                <button class="btn btn-primary">Ver productos</button>
+              </div>
+            </div>
+
+            <div class="category-card" data-category="piedras">
+              <div class="category-image">
+                <div class="category-placeholder">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+                    <defs>
+                      <linearGradient id="cat6" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0" stop-color="#e7509d"/>
+                        <stop offset="1" stop-color="#e8d79c"/>
+                      </linearGradient>
+                    </defs>
+                    <rect width="400" height="300" fill="url(#cat6)"/>
+                    <circle cx="320" cy="80" r="15" fill="#2e694f"/>
+                    <path d="M50 200 L120 120 L180 200 L240 140 L320 200" fill="none" stroke="#2e694f" stroke-width="8" stroke-linecap="round"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="category-content">
+                <h3>Piedras</h3>
+                <p>Minerales naturales mexicanos</p>
+                <button class="btn btn-primary">Ver productos</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="shop" id="productos">
+        <div class="container">
+          <div class="shop-controls">
+            <div class="filters" role="tablist" aria-label="Filtrar por categoría">
+              <button class="chip is-active" data-filter="all" role="tab" aria-selected="true">Todo</button>
+              <button class="chip" data-filter="anillos" role="tab">Anillos</button>
+              <button class="chip" data-filter="aretes" role="tab">Aretes</button>
+              <button class="chip" data-filter="collares" role="tab">Collares</button>
+              <button class="chip" data-filter="pulseras" role="tab">Pulseras</button>
+              <button class="chip" data-filter="dijes" role="tab">Dijes</button>
+              <button class="chip" data-filter="piedras" role="tab">Piedras</button>
+            </div>
+            <label class="search">
+              <input id="searchInput" type="search" placeholder="Buscar piezas..." aria-label="Buscar productos" />
+            </label>
+          </div>
+
+          <div id="productGrid" class="product-grid" aria-live="polite"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="border-mex"></div>
+      <div class="container footer-content">
+        <div class="footer-main">
+          <div class="footer-brand">
+            <a class="brand" href="/">
+              <img src="/assets/logo.svg" alt="El Xolito Mex" class="brand-logo" />
+              <span class="brand-text">El Xolito Mex</span>
+            </a>
+            <p class="footer-description">Joyería mexicana minimalista hecha a mano. Cada pieza cuenta una historia única.</p>
+            <div class="social-links">
+              <a href="#" aria-label="Instagram">📷</a>
+              <a href="#" aria-label="Facebook">📘</a>
+              <a href="#" aria-label="WhatsApp">💬</a>
+            </div>
+          </div>
+          <div class="footer-links">
+            <div class="footer-column">
+              <h4>Tienda</h4>
+              <ul>
+                <li><a href="/tienda.html">Todos los productos</a></li>
+                <li><a href="/#ofertas">Ofertas</a></li>
+                <li><a href="/tienda.html?filter=anillos">Anillos</a></li>
+                <li><a href="/tienda.html?filter=aretes">Aretes</a></li>
+                <li><a href="/tienda.html?filter=collares">Collares</a></li>
+                <li><a href="/tienda.html?filter=pulseras">Pulseras</a></li>
+              </ul>
+            </div>
+            <div class="footer-column">
+              <h4>Empresa</h4>
+              <ul>
+                <li><a href="/#historia">Nuestra historia</a></li>
+                <li><a href="/#nosotros">Nosotros</a></li>
+                <li><a href="/blog.html">Blog</a></li>
+                <li><a href="/#contacto">Contacto</a></li>
+              </ul>
+            </div>
+            <div class="footer-column">
+              <h4>Atención</h4>
+              <ul>
+                <li><a href="#">Preguntas frecuentes</a></li>
+                <li><a href="#">Envíos y devoluciones</a></li>
+                <li><a href="#">Cuidado de joyas</a></li>
+                <li><a href="#">Garantía</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p class="foot-note">© <span id="year"></span> El Xolito Mex. Todos los derechos reservados.</p>
+          <div class="footer-legal">
+            <a href="#">Términos y condiciones</a>
+            <a href="#">Política de privacidad</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="auth-modal" aria-hidden="true">
+      <div class="auth-overlay"></div>
+      <div class="auth-dialog">
+        <div class="auth-header">
+          <h3>Iniciar Sesión</h3>
+          <button class="auth-close" aria-label="Cerrar">×</button>
+        </div>
+        <div class="auth-content">
+          <form class="auth-form">
+            <div class="form-group">
+              <label for="loginEmail">Email</label>
+              <input type="email" id="loginEmail" required>
+            </div>
+            <div class="form-group">
+              <label for="loginPassword">Contraseña</label>
+              <input type="password" id="loginPassword" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+          </form>
+          <p class="auth-switch">¿No tienes cuenta? <a href="#" onclick="switchToRegister()">Regístrate aquí</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="auth-modal" aria-hidden="true">
+      <div class="auth-overlay"></div>
+      <div class="auth-dialog">
+        <div class="auth-header">
+          <h3>Crear Cuenta</h3>
+          <button class="auth-close" aria-label="Cerrar">×</button>
+        </div>
+        <div class="auth-content">
+          <form class="auth-form">
+            <div class="form-group">
+              <label for="registerName">Nombre completo</label>
+              <input type="text" id="registerName" required>
+            </div>
+            <div class="form-group">
+              <label for="registerEmail">Email</label>
+              <input type="email" id="registerEmail" required>
+            </div>
+            <div class="form-group">
+              <label for="registerPassword">Contraseña</label>
+              <input type="password" id="registerPassword" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Crear Cuenta</button>
+          </form>
+          <p class="auth-switch">¿Ya tienes cuenta? <a href="#" onclick="switchToLogin()">Inicia sesión aquí</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="cart-modal" aria-hidden="true">
+      <div class="cart-overlay"></div>
+      <div class="cart-drawer">
+        <div class="cart-header">
+          <h3>Tu carrito</h3>
+          <button class="cart-close" aria-label="Cerrar carrito">×</button>
+        </div>
+        <div class="cart-content">
+          <div id="cartItems" class="cart-items"></div>
+          <div class="cart-empty">
+            <p>Tu carrito está vacío</p>
+            <a href="/tienda.html" class="btn btn-primary">Ir a la tienda</a>
+          </div>
+        </div>
+        <div class="cart-footer">
+          <div class="cart-total">
+            <span>Total: <strong id="cartTotal">$0</strong></span>
+          </div>
+          <button class="btn btn-primary cart-checkout" disabled>Proceder al pago</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El Xolito Mex – Joyería</title>
+  <meta name="description" content="Joyería mexicana minimalista. Hecha a mano, con alma." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="/style.css" />
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label="El Xolito Mex">
+        <img src="/assets/logo.svg" alt="El Xolito Mex" class="brand-logo" />
+        <span class="brand-text">El Xolito Mex</span>
+      </a>
+      <nav class="nav" aria-label="Principal">
+        <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+        <ul class="nav-list">
+          <li><a href="/" class="active">Inicio</a></li>
+          <li><a href="/tienda.html">Tienda</a></li>
+          <li><a href="/#ofertas">Ofertas</a></li>
+          <li><a href="/blog.html">Blog</a></li>
+          <li><a href="/#historia">Historia</a></li>
+          <li><a href="/#nosotros">Nosotros</a></li>
+          <li><a href="/#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <div class="auth-buttons">
+          <button class="btn btn-outline btn-sm" onclick="openLoginModal()">Iniciar Sesión</button>
+          <button class="btn btn-primary btn-sm" onclick="openRegisterModal()">Registrarse</button>
+        </div>
+        <button class="cart-toggle" aria-label="Ver carrito" data-count="0">
+          🛒
+        </button>
+      </div>
+    </div>
+    <div class="border-mex"></div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <h1 class="display">Joyería mexicana minimalista</h1>
+          <p class="lead">Piezas únicas inspiradas en texturas y colores de México. Hechas a mano, para acompañarte
+            todos los días.</p>
+          <div class="hero-cta">
+            <a href="/tienda.html" class="btn btn-primary">Ver tienda completa</a>
+            <a href="#destacados" class="btn btn-outline">Ver destacados</a>
+          </div>
+        </div>
+        <div class="hero-media" aria-hidden="true">
+          <div class="hero-badge">Hecho en MX</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ofertas" class="offers">
+      <div class="container">
+        <h2 class="section-title">Ofertas especiales</h2>
+        <div class="offers-grid">
+          <div class="offer-card">
+            <div class="offer-badge">-20%</div>
+            <h3>Anillos de plata</h3>
+            <p>Descuento en toda la colección de anillos de plata .925</p>
+            <div class="offer-price">
+              <span class="old-price">$1,100</span>
+              <span class="new-price">$880</span>
+            </div>
+            <a href="/tienda.html?filter=anillos" class="btn btn-primary">Ver oferta</a>
+          </div>
+          <div class="offer-card">
+            <div class="offer-badge">-15%</div>
+            <h3>Pulseras de oro</h3>
+            <p>Oro laminado con acabados únicos. Oferta limitada</p>
+            <div class="offer-price">
+              <span class="old-price">$820</span>
+              <span class="new-price">$697</span>
+            </div>
+            <a href="/tienda.html?filter=pulseras" class="btn btn-primary">Ver oferta</a>
+          </div>
+          <div class="offer-card">
+            <div class="offer-badge">-25%</div>
+            <h3>Colección completa</h3>
+            <p>Compra 3 piezas y obtén 25% de descuento</p>
+            <div class="offer-price">
+              <span class="old-price">$3,200</span>
+              <span class="new-price">$2,400</span>
+            </div>
+            <a href="/tienda.html" class="btn btn-primary">Ver oferta</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="destacados" class="featured">
+      <div class="container">
+        <h2 class="section-title">Piezas destacadas</h2>
+        <div class="featured-grid">
+          <div id="featuredCarousel" class="featured-carousel"></div>
+        </div>
+        <div class="featured-cta">
+          <a href="/tienda.html" class="btn btn-primary">Ver toda la colección</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonios" class="testimonials">
+      <div class="container">
+        <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+        <div class="testimonials-grid">
+          <div class="testimonial">
+            <div class="testimonial-content">
+              <p>"Las piezas de El Xolito Mex son únicas. Cada joya cuenta una historia y la calidad es excepcional."
+              </p>
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar">M</div>
+              <div class="author-info">
+                <h4>María González</h4>
+                <span>Ciudad de México</span>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial">
+            <div class="testimonial-content">
+              <p>"El diseño minimalista con toques mexicanos es perfecto. Recibo muchos cumplidos cuando las uso."</p>
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar">A</div>
+              <div class="author-info">
+                <h4>Ana Rodríguez</h4>
+                <span>Guadalajara</span>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial">
+            <div class="testimonial-content">
+              <p>"Excelente atención al cliente y envíos rápidos. Definitivamente volveré a comprar."</p>
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar">C</div>
+              <div class="author-info">
+                <h4>Carlos Méndez</h4>
+                <span>Monterrey</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="historia" class="history">
+      <div class="container">
+        <h2 class="section-title">Nuestra historia</h2>
+        <div class="history-grid">
+          <div class="history-content">
+            <p>En 2018, María Elena comenzó a crear joyería en su pequeño taller de la Ciudad de México, inspirada por
+              las formas orgánicas de la naturaleza mexicana y el minimalismo contemporáneo.</p>
+            <p>Lo que empezó como un pasatiempo se convirtió en una pasión por crear piezas que contaran historias. Cada
+              joya de El Xolito Mex lleva consigo la esencia de México: desde los colores vibrantes de nuestros mercados
+              hasta las texturas de nuestros paisajes.</p>
+            <p>Hoy, trabajamos con artesanos locales, usando materiales responsables y técnicas tradicionales adaptadas
+              al diseño moderno. Cada pieza es única, como cada persona que la porta.</p>
+          </div>
+          <div class="history-visual">
+            <div class="history-card">
+              <h3>2018</h3>
+              <p>Primer taller en Coyoacán</p>
+            </div>
+            <div class="history-card">
+              <h3>2020</h3>
+              <p>Primera colección online</p>
+            </div>
+            <div class="history-card">
+              <h3>2024</h3>
+              <p>+500 piezas únicas creadas</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nuestro taller -->
+    <section class="taller-collage">
+      <h2 class="section-title">Nuestro taller</h2>
+      <div class="taller-collage-grid">
+        <div class="taller-item item1"><img src="/assets/img.jpeg" alt="Taller 1"></div>
+        <div class="taller-item item2"><img src="/assets/img.jpeg" alt="Taller 2"></div>
+        <div class="taller-item item3"><img src="/assets/img.jpeg" alt="Taller 3"></div>
+        <div class="taller-item item4"><img src="/assets/img.jpeg" alt="Taller 4"></div>
+        <div class="taller-item item5"><img src="/assets/img.jpeg" alt="Taller 5"></div>
+        <div class="taller-item item6"><img src="/assets/img.jpeg" alt="Taller 6"></div>
+      </div>
+    </section>
+
+    <section id="nosotros" class="about">
+      <div class="container about-grid">
+        <div>
+          <h2 class="section-title">Nuestra esencia</h2>
+          <p>En El Xolito Mex creemos en el poder de lo simple con significado. Diseñamos piezas atemporales que
+            celebran la herencia mexicana con un lenguaje minimalista.</p>
+          <p>Materiales responsables, manufactura local y un compromiso con lo bien hecho.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-card-inner">
+            <h3>Garantía</h3>
+            <p>Envíos a todo México. Cambios y reparaciones sencillas.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto" class="cta">
+      <div class="container cta-inner">
+        <h2 class="section-title">¿Listx para tu nueva pieza favorita?</h2>
+        <a href="/tienda.html" class="btn btn-primary">Comprar ahora</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="border-mex"></div>
+    <div class="container footer-content">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <a class="brand" href="/">
+            <img src="/assets/logo.svg" alt="El Xolito Mex" class="brand-logo" />
+            <span class="brand-text">El Xolito Mex</span>
+          </a>
+          <p class="footer-description">Joyería mexicana minimalista hecha a mano. Cada pieza cuenta una historia única.
+          </p>
+          <div class="social-links">
+            <a href="#" aria-label="Instagram">📷</a>
+            <a href="#" aria-label="Facebook">📘</a>
+            <a href="#" aria-label="WhatsApp">💬</a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <div class="footer-column">
+            <h4>Tienda</h4>
+            <ul>
+              <li><a href="/tienda.html">Todos los productos</a></li>
+              <li><a href="/#ofertas">Ofertas</a></li>
+              <li><a href="/tienda.html?filter=anillos">Anillos</a></li>
+              <li><a href="/tienda.html?filter=aretes">Aretes</a></li>
+              <li><a href="/tienda.html?filter=collares">Collares</a></li>
+              <li><a href="/tienda.html?filter=pulseras">Pulseras</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Empresa</h4>
+            <ul>
+              <li><a href="/#historia">Nuestra historia</a></li>
+              <li><a href="/#nosotros">Nosotros</a></li>
+              <li><a href="/blog.html">Blog</a></li>
+              <li><a href="/#contacto">Contacto</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Atención</h4>
+            <ul>
+              <li><a href="#">Preguntas frecuentes</a></li>
+              <li><a href="#">Envíos y devoluciones</a></li>
+              <li><a href="#">Cuidado de joyas</a></li>
+              <li><a href="#">Garantía</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="foot-note">© <span id="year"></span> El Xolito Mex. Todos los derechos reservados.</p>
+        <div class="footer-legal">
+          <a href="#">Términos y condiciones</a>
+          <a href="#">Política de privacidad</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Login Modal -->
+  <div id="loginModal" class="auth-modal" aria-hidden="true">
+    <div class="auth-overlay"></div>
+    <div class="auth-dialog">
+      <div class="auth-header">
+        <h3>Iniciar Sesión</h3>
+        <button class="auth-close" aria-label="Cerrar">×</button>
+      </div>
+      <div class="auth-content">
+        <form class="auth-form">
+          <div class="form-group">
+            <label for="loginEmail">Email</label>
+            <input type="email" id="loginEmail" required>
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Contraseña</label>
+            <input type="password" id="loginPassword" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+        </form>
+        <p class="auth-switch">¿No tienes cuenta? <a href="#" onclick="switchToRegister()">Regístrate aquí</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Register Modal -->
+  <div id="registerModal" class="auth-modal" aria-hidden="true">
+    <div class="auth-overlay"></div>
+    <div class="auth-dialog">
+      <div class="auth-header">
+        <h3>Crear Cuenta</h3>
+        <button class="auth-close" aria-label="Cerrar">×</button>
+      </div>
+      <div class="auth-content">
+        <form class="auth-form">
+          <div class="form-group">
+            <label for="registerName">Nombre completo</label>
+            <input type="text" id="registerName" required>
+          </div>
+          <div class="form-group">
+            <label for="registerEmail">Email</label>
+            <input type="email" id="registerEmail" required>
+          </div>
+          <div class="form-group">
+            <label for="registerPassword">Contraseña</label>
+            <input type="password" id="registerPassword" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Crear Cuenta</button>
+        </form>
+        <p class="auth-switch">¿Ya tienes cuenta? <a href="#" onclick="switchToLogin()">Inicia sesión aquí</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart Modal -->
+  <div id="cartModal" class="cart-modal" aria-hidden="true">
+    <div class="cart-overlay"></div>
+    <div class="cart-drawer">
+      <div class="cart-header">
+        <h3>Tu carrito</h3>
+        <button class="cart-close" aria-label="Cerrar carrito">×</button>
+      </div>
+      <div class="cart-content">
+        <div id="cartItems" class="cart-items"></div>
+        <div class="cart-empty">
+          <p>Tu carrito está vacío</p>
+          <a href="/tienda.html" class="btn btn-primary">Ir a la tienda</a>
+        </div>
+      </div>
+      <div class="cart-footer">
+        <div class="cart-total">
+          <span>Total: <strong id="cartTotal">$0</strong></span>
+        </div>
+        <button class="btn btn-primary cart-checkout" disabled>Proceder al pago</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/main.js"></script>
+</body>
+
+</html>
