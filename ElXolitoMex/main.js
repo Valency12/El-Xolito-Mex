@@ -178,13 +178,14 @@ function renderProducts(list, containerId = 'productGrid') {
 		card.innerHTML = `
 			<div class="card-media">
 				${p.image ? `<img src="${p.image}" alt="${p.name}">` : createPlaceholderSVG(p.id)}
+				<button class="btn btn-outline" onclick="cart.addItem('${p.id}')">Agregar al carrito</button>
+
 			</div>
 			<div class="card-body">
 				<h3>${p.name}</h3>
 				<div class="price">${formatCurrency(p.price)}</div>
-				<div class="meta"><span class="tag">${p.category}</span> · ${p.material}</div>
-				<button class="btn btn-outline" onclick="cart.addItem('${p.id}')">Agregar al carrito</button>
-			</div>
+	
+							</div>
 		`;
 		frag.appendChild(card);
 	}
@@ -192,31 +193,32 @@ function renderProducts(list, containerId = 'productGrid') {
 }
 
 function renderFeaturedCarousel() {
-	const featured = PRODUCTS.filter(p => p.featured);
-	const container = document.getElementById('featuredCarousel');
-	if (!container) return;
+  const featured = PRODUCTS.filter(p => p.featured);
+  const container = document.getElementById('featuredCarousel');
+  if (!container) return;
 
-	// Duplicate items for seamless loop
-	const duplicatedItems = [...featured, ...featured];
+  // Duplica los productos para el loop
+  const items = [...featured, ...featured];
 
-	container.innerHTML = '';
-	const frag = document.createDocumentFragment();
+  container.innerHTML = '';
+  const frag = document.createDocumentFragment();
 
-	for (const p of duplicatedItems) {
-		const item = document.createElement('article');
-		item.className = 'featured-item';
-		item.innerHTML = `
-			<div class="card-media">${createPlaceholderSVG(p.id)}</div>
-			<div class="card-body">
-				<h3>${p.name}</h3>
-				<div class="price">${formatCurrency(p.price)}</div>
-				<div class="meta"><span class="tag">${p.category}</span> · ${p.material}</div>
-				<button class="btn btn-outline" onclick="cart.addItem('${p.id}')">Agregar al carrito</button>
-			</div>
-		`;
-		frag.appendChild(item);
-	}
-	container.appendChild(frag);
+  for (const p of items) {
+    const item = document.createElement('article');
+    item.className = 'featured-item';
+    item.innerHTML = `
+      <div class="card-media">
+        ${p.image ? `<img class="card-bg" src="${p.image.replace(/^\//, '')}" alt="${p.name}">` : createPlaceholderSVG(p.id)}
+        <div class="card-body">
+          <h3>${p.name}</h3>
+          <div class="price">${formatCurrency(p.price)}</div>
+        </div>
+        <button class="btn btn-outline featured-btn" onclick="cart.addItem('${p.id}')">Agregar al carrito</button>
+      </div>
+    `;
+    frag.appendChild(item);
+  }
+  container.appendChild(frag);
 }
 
 function setupCategories() {

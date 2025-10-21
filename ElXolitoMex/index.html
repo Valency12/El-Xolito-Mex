@@ -14,7 +14,7 @@
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap"
     rel="stylesheet">
 
-  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
@@ -28,9 +28,9 @@
         <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
         <ul class="nav-list">
           <li><a href="/" class="active">Inicio</a></li>
-          <li><a href="/tienda.html">Tienda</a></li>
+          <li><a href="tienda.html">Tienda</a></li>
           <li><a href="/#ofertas">Ofertas</a></li>
-          <li><a href="/blog.html">Blog</a></li>
+          <li><a href="blog.html">Blog</a></li>
           <li><a href="/#historia">Historia</a></li>
           <li><a href="/#nosotros">Nosotros</a></li>
           <li><a href="/#contacto">Contacto</a></li>
@@ -42,7 +42,7 @@
           <button class="btn btn-primary btn-sm" onclick="openRegisterModal()">Registrarse</button>
         </div>
         <button class="cart-toggle" aria-label="Ver carrito" data-count="0">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart2"
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-cart2"
             viewBox="0 0 16 16">
             <path
               d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5M3.14 5l1.25 5h8.22l1.25-5zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0" />
@@ -61,12 +61,13 @@
           <p class="lead">Piezas únicas inspiradas en texturas y colores de México. Hechas a mano, para acompañarte
             todos los días.</p>
           <div class="hero-cta">
-            <a href="/tienda.html" class="btn btn-primary">Ver tienda completa</a>
+            <a href="tienda.html" class="btn btn-primary">Ver tienda completa</a>
             <a href="#destacados" class="btn btn-outline">Ver destacados</a>
           </div>
         </div>
         <div class="hero-media" aria-hidden="true">
-          <div class="hero-badge">Hecho en MX</div>
+          <img src="assets/Anillos/anillo.png" alt="Joyería mexicana minimalista" class="hero-image" />
+          
         </div>
       </div>
     </section>
@@ -77,33 +78,36 @@
         <div class="offers-grid">
           <div class="offer-card">
             <div class="offer-badge">-20%</div>
+            <img src="assets/Conjuntos/anilloplata.png" alt="Anillos de plata" class="offer-image" />
             <h3>Anillos de plata</h3>
             <p>Descuento en toda la colección de anillos de plata .925</p>
             <div class="offer-price">
               <span class="old-price">$1,100</span>
               <span class="new-price">$880</span>
             </div>
-            <a href="/tienda.html?filter=anillos" class="btn btn-primary">Ver oferta</a>
+            <a href="tienda.html?filter=anillos" class="btn btn-primary">Ver oferta</a>
           </div>
           <div class="offer-card">
             <div class="offer-badge">-15%</div>
+            <img src="assets/Conjuntos/pulseraplata.png" alt="Anillos de plata" class="offer-image" />
             <h3>Pulseras de oro</h3>
             <p>Oro laminado con acabados únicos. Oferta limitada</p>
             <div class="offer-price">
               <span class="old-price">$820</span>
               <span class="new-price">$697</span>
             </div>
-            <a href="/tienda.html?filter=pulseras" class="btn btn-primary">Ver oferta</a>
+            <a href="tienda.html?filter=pulseras" class="btn btn-primary">Ver oferta</a>
           </div>
           <div class="offer-card">
             <div class="offer-badge">-25%</div>
+            <img src="assets/Conjuntos/conjuntoplata.png" alt="Anillos de plata" class="offer-image" />
             <h3>Colección completa</h3>
             <p>Compra 3 piezas y obtén 25% de descuento</p>
             <div class="offer-price">
               <span class="old-price">$3,200</span>
               <span class="new-price">$2,400</span>
             </div>
-            <a href="/tienda.html" class="btn btn-primary">Ver oferta</a>
+            <a href="tienda.html" class="btn btn-primary">Ver oferta</a>
           </div>
         </div>
       </div>
@@ -116,7 +120,7 @@
           <div id="featuredCarousel" class="featured-carousel"></div>
         </div>
         <div class="featured-cta">
-          <a href="/tienda.html" class="btn btn-primary">Ver toda la colección</a>
+          <a href="tienda.html" class="btn btn-primary">Ver toda la colección</a>
         </div>
       </div>
     </section>
@@ -201,12 +205,12 @@
     <section class="taller-collage">
       <h2 class="section-title">Nuestro taller</h2>
       <div class="taller-collage-grid">
-        <div class="taller-item item1"><img src="/assets/img.jpeg" alt="Taller 1"></div>
-        <div class="taller-item item2"><img src="/assets/img.jpeg" alt="Taller 2"></div>
-        <div class="taller-item item3"><img src="/assets/img.jpeg" alt="Taller 3"></div>
-        <div class="taller-item item4"><img src="/assets/img.jpeg" alt="Taller 4"></div>
-        <div class="taller-item item5"><img src="/assets/img.jpeg" alt="Taller 5"></div>
-        <div class="taller-item item6"><img src="/assets/img.jpeg" alt="Taller 6"></div>
+        <div class="taller-item item1"><img src="assets/img.jpeg" alt="Taller 1"></div>
+        <div class="taller-item item2"><img src="assets/img.jpeg" alt="Taller 2"></div>
+        <div class="taller-item item3"><img src="assets/img.jpeg" alt="Taller 3"></div>
+        <div class="taller-item item4"><img src="assets/img.jpeg" alt="Taller 4"></div>
+        <div class="taller-item item5"><img src="assets/img.jpeg" alt="Taller 5"></div>
+        <div class="taller-item item6"><img src="assets/img.jpeg" alt="Taller 6"></div>
       </div>
     </section>
 
@@ -230,7 +234,7 @@
     <section id="contacto" class="cta">
       <div class="container cta-inner">
         <h2 class="section-title">¿Listx para tu nueva pieza favorita?</h2>
-        <a href="/tienda.html" class="btn btn-primary">Comprar ahora</a>
+        <a href="tienda.html" class="btn btn-primary">Comprar ahora</a>
       </div>
     </section>
   </main>
@@ -275,12 +279,12 @@
           <div class="footer-column">
             <h4>Tienda</h4>
             <ul>
-              <li><a href="/tienda.html">Todos los productos</a></li>
+              <li><a href="tienda.html">Todos los productos</a></li>
               <li><a href="/#ofertas">Ofertas</a></li>
-              <li><a href="/tienda.html?filter=anillos">Anillos</a></li>
-              <li><a href="/tienda.html?filter=aretes">Aretes</a></li>
-              <li><a href="/tienda.html?filter=collares">Collares</a></li>
-              <li><a href="/tienda.html?filter=pulseras">Pulseras</a></li>
+              <li><a href="tienda.html?filter=anillos">Anillos</a></li>
+              <li><a href="tienda.html?filter=aretes">Aretes</a></li>
+              <li><a href="tienda.html?filter=collares">Collares</a></li>
+              <li><a href="tienda.html?filter=pulseras">Pulseras</a></li>
             </ul>
           </div>
           <div class="footer-column">
@@ -379,7 +383,7 @@
         <div id="cartItems" class="cart-items"></div>
         <div class="cart-empty">
           <p>Tu carrito está vacío</p>
-          <a href="/tienda.html" class="btn btn-primary">Ir a la tienda</a>
+          <a href="tienda.html" class="btn btn-primary">Ir a la tienda</a>
         </div>
       </div>
       <div class="cart-footer">
@@ -391,7 +395,7 @@
     </div>
   </div>
 
-  <script type="module" src="/main.js"></script>
+  <script type="module" src="main.js"></script>
 </body>
 
 </html>
