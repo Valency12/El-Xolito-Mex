@@ -14,35 +14,35 @@
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap"
     rel="stylesheet">
 
-  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
+  
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="/" aria-label="El Xolito Mex">
-        <img src="/assets/logo.svg" alt="El Xolito Mex" class="brand-logo" />
-        <span class="brand-text">El Xolito Mex</span>
+        <img src="" alt="El Xolito Mex" class="brand-logo" />
+        <!--<span class="brand-text"></span>-->
       </a>
       <nav class="nav" aria-label="Principal">
         <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
         <ul class="nav-list">
-          <li><a href="/">Inicio</a></li>
-          <li><a href="/tienda.html" class="active">Tienda</a></li>
-          <li><a href="/#ofertas">Ofertas</a></li>
-          <li><a href="/blog.html">Blog</a></li>
-          <li><a href="/#historia">Historia</a></li>
-          <li><a href="/#nosotros">Nosotros</a></li>
-          <li><a href="/#contacto">Contacto</a></li>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="tienda.html">Tienda</a></li>
+          <li><a href="index.html#ofertas">Ofertas</a></li>
+          <li><a href="index.html#nosotros">Nosotros</a></li>
+          <li><a href="index.html#contacto">Contacto</a></li>
         </ul>
       </nav>
       <div class="header-actions">
         <div class="auth-buttons">
-          <button class="btn btn-outline btn-sm" onclick="openLoginModal()">Iniciar Sesión</button>
-          <button class="btn btn-primary btn-sm" onclick="openRegisterModal()">Registrarse</button>
+          <button id="btnLogin" class="btn">Iniciar Sesión</button>
+          <button id="btnRegister" class="btn">Registrarse</button>
+
         </div>
         <button class="cart-toggle" aria-label="Ver carrito" data-count="0">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart2"
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-cart2"
             viewBox="0 0 16 16">
             <path
               d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5M3.14 5l1.25 5h8.22l1.25-5zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0" />
@@ -50,7 +50,6 @@
         </button>
       </div>
     </div>
-    <div class="border-mex"></div>
   </header>
 
   <main>
@@ -67,7 +66,7 @@
           <div class="category-card" data-category="anillos">
             <div class="category-image">
               <div class="category-placeholder">
-                <img src="/assets/Categorias/anillos.jpeg" alt="Categoría Anillos" />
+                <img src="assets/Categorias/anillos.jpeg" alt="Categoría Anillos" />
               </div>
             </div>
             <div class="category-content">
@@ -80,7 +79,7 @@
           <div class="category-card" data-category="aretes">
             <div class="category-image">
               <div class="category-placeholder">
-                <img src="/assets/Categorias/aretes.jpeg" alt="Categoría Aretes y Arracadas" />
+                <img src="assets/Categorias/aretes.jpeg" alt="Categoría Aretes y Arracadas" />
               </div>
             </div>
             <div class="category-content">
@@ -93,7 +92,7 @@
           <div class="category-card" data-category="collares">
             <div class="category-image">
               <div class="category-placeholder">
-                <img src="/assets/Categorias/collares.jpeg" alt="Categoría Collares" />
+                <img src="assets/Categorias/collares.jpeg" alt="Categoría Collares" />
               </div>
             </div>
             <div class="category-content">
@@ -106,7 +105,7 @@
           <div class="category-card" data-category="pulseras">
             <div class="category-image">
               <div class="category-placeholder">
-                <img src="/assets/Categorias/pulseras.jpeg" alt="Categoría Pulseras" />
+                <img src="assets/Categorias/pulseras.jpeg" alt="Categoría Pulseras" />
               </div>
             </div>
             <div class="category-content">
@@ -119,7 +118,7 @@
           <div class="category-card" data-category="conjuntos">
             <div class="category-image">
               <div class="category-placeholder">
-                <img src="/assets/Categorias/conjuntos.jpeg" alt="Categoría Conjuntos" />
+                <img src="assets/Categorias/conjuntos.jpeg" alt="Categoría Conjuntos" />
               </div>
             </div>
             <div class="category-content">
@@ -132,7 +131,7 @@
           <div class="category-card" data-category="piedras">
             <div class="category-image">
               <div class="category-placeholder">
-                <img src="/assets/Categorias/piedras.jpeg" alt="Categoría Piedras" />
+                <img src="assets/Categorias/piedras.jpeg" alt="Categoría Piedras" />
               </div>
             </div>
             <div class="category-content">
@@ -173,7 +172,7 @@
       <div class="footer-main">
         <div class="footer-brand">
           <a class="brand" href="/">
-            <img src="/assets/logo.svg" alt="El Xolito Mex" class="brand-logo" />
+            <img src="assets/logo.svg" alt="El Xolito Mex" class="brand-logo" />
             <span class="brand-text">El Xolito Mex</span>
           </a>
           <p class="footer-description">Joyería mexicana minimalista hecha a mano. Cada pieza cuenta una historia única.
@@ -245,7 +244,7 @@
     </div>
   </footer>
 
-  <!-- Login Modal -->
+ <!-- Login Modal -->
   <div id="loginModal" class="auth-modal" aria-hidden="true">
     <div class="auth-overlay"></div>
     <div class="auth-dialog">
@@ -263,7 +262,18 @@
             <label for="loginPassword">Contraseña</label>
             <input type="password" id="loginPassword" required>
           </div>
+          <div class="separator"><span>or</span></div>
+          <div class="social-login">
+            <button class="social-btn" id="googleLogin">
+              <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google"> Iniciar con Google
+            </button>
+            <button class="social-btn" id="appleLogin">
+              <img src="https://www.svgrepo.com/show/452196/apple-black.svg" alt="Apple"> Iniciar con Apple
+            </button>
+          </div>
+          <div class="form-inicio">
           <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+          </div>
         </form>
         <p class="auth-switch">¿No tienes cuenta? <a href="#" onclick="switchToRegister()">Regístrate aquí</a></p>
       </div>
@@ -292,7 +302,19 @@
             <label for="registerPassword">Contraseña</label>
             <input type="password" id="registerPassword" required>
           </div>
+          <div class="separator"><span>or</span></div>
+          <div class="social-login">
+            <button class="social-btn" id="googleLogin">
+              <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google"> Iniciar con Google
+            </button>
+            <button class="social-btn" id="appleLogin">
+              <img src="https://www.svgrepo.com/show/452196/apple-black.svg" alt="Apple"> Iniciar con Apple
+            </button>
+          </div>
+
+          <div class="form-inicio">
           <button type="submit" class="btn btn-primary">Crear Cuenta</button>
+          </div>
         </form>
         <p class="auth-switch">¿Ya tienes cuenta? <a href="#" onclick="switchToLogin()">Inicia sesión aquí</a></p>
       </div>
@@ -311,7 +333,7 @@
         <div id="cartItems" class="cart-items"></div>
         <div class="cart-empty">
           <p>Tu carrito está vacío</p>
-          <a href="/tienda.html" class="btn btn-primary">Ir a la tienda</a>
+          <a href="tienda.html" class="btn btn-primary">Ir a la tienda</a>
         </div>
       </div>
       <div class="cart-footer">
@@ -322,6 +344,7 @@
       </div>
     </div>
   </div>
+
 
   <script type="module" src="/main.js"></script>
 </body>

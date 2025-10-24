@@ -1,6 +1,6 @@
 const PRODUCTS = [
-	{ id: 'A1', name: 'Anillo Sello', category: 'anillos', price: 890, material: 'Plata .925', color: 'Plata', featured: true, image: '/assets/Anillos/anillo sello.png' },
-	{ id: 'A2', name: 'Anillo Labradorita', category: 'anillos', price: 950, material: 'Oro laminado', color: 'Dorado', featured: false, image: '/assets/Anillos/anillo_piedra.png' },
+	{ id: 'A1', name: 'Anillo Sello', category: 'anillos', price: 890, material: 'Plata .925', color: 'Plata', featured: true, image: 'assets/Anillos/anillo sello.png' },
+	{ id: 'A2', name: 'Anillo Labradorita', category: 'anillos', price: 950, material: 'Oro laminado', color: 'Dorado', featured: false, image: 'assets/Anillos/anillo_piedra.png' },
 	//{ id: 'A3', name: 'Anillo Cactus', category: 'anillos', price: 820, material: 'Plata .925', color: 'Plata', featured: true },
 	//{ id: 'A4', name: 'Anillo Volcán', category: 'anillos', price: 1100, material: 'Oro laminado', color: 'Dorado', featured: false },
 	//{ id: 'A5', name: 'Anillo Agave', category: 'anillos', price: 780, material: 'Plata .925', color: 'Plata', featured: false },
@@ -14,19 +14,19 @@ const PRODUCTS = [
 	//{ id: 'C3', name: 'Collar Agave', category: 'collares', price: 1180, material: 'Plata .925', color: 'Plata', featured: false },
 	//{ id: 'C4', name: 'Collar Luna', category: 'collares', price: 1350, material: 'Oro laminado', color: 'Dorado', featured: false },
 	//{ id: 'C5', name: 'Collar Volcán', category: 'collares', price: 1100, material: 'Plata .925', color: 'Plata', featured: false },
-	{ id: 'D1', name: 'Argolla con grabado', category: 'pulseras', price: 640, material: 'Plata .925', color: 'Plata', featured: false, image: '/assets/Pulseras/argolla_con_grabado.png' },
-	{ id: 'D2', name: 'Brazalete de Canasta', category: 'pulseras', price: 690, material: 'Oro laminado', color: 'Dorado', featured: true, image: '/assets/Pulseras/brazalete_canasta.png' },
-	{ id: 'D3', name: 'Brazalete con Turquesa', category: 'pulseras', price: 720, material: 'Plata .925', color: 'Plata', featured: false, image: '/assets/Pulseras/brazalete_con_turquesa.png' },
-	{ id: 'D4', name: 'Pulsera Box', category: 'pulseras', price: 580, material: 'Plata .925', color: 'Plata', featured: false, image: '/assets/Pulseras/pulsera box.png' },
-	{ id: 'D5', name: 'Pulsera Cordon', category: 'pulseras', price: 750, material: 'Oro laminado', color: 'Dorado', featured: false, image: '/assets/Pulseras/pulsera cordon.png' },
-	{ id: 'D6', name: 'Pulsera Cubana', category: 'pulseras', price: 750, material: 'Oro laminado', color: 'Dorado', featured: false, image: '/assets/Pulseras/pulsera cubana.png' },
-	{ id: 'D5', name: 'Pulsera Cuerda', category: 'pulseras', price: 750, material: 'Oro laminado', color: 'Dorado', featured: false, image: '/assets/Pulseras/Pulsera cuerda.png' },
-	{ id: 'D5', name: 'Pulsera Gucci', category: 'pulseras', price: 750, material: 'Oro laminado', color: 'Dorado', featured: false, image: '/assets/Pulseras/pulsera gucci.png' },
-	{ id: 'E1', name: 'Set Amatista', category: 'conjuntos', price: 450, material: 'Plata .925', color: 'Plata', featured: false, image: '/assets/Conjuntos/conjunto_amatista.png' },
-	{ id: 'E2', name: 'Set Conchas', category: 'conjuntos', price: 520, material: 'Oro laminado', color: 'Dorado', featured: false, image: '/assets/Conjuntos/conjunto_conchas.png' },
-	{ id: 'E3', name: 'Set Ojo de Tigre', category: 'conjuntos', price: 380, material: 'Plata .925', color: 'Plata', featured: false, image: '/assets/Conjuntos/conjunto_ojo_de_tigre.png' },
-	{ id: 'E4', name: 'Set Labradorita', category: 'conjuntos', price: 480, material: 'Oro laminado', color: 'Dorado', featured: false, image: '/assets/Conjuntos/conjunto_ labradorita.png' },
-	{ id: 'E5', name: 'Set Turquesa', category: 'conjuntos', price: 480, material: 'Plata .925', color: 'Plata', featured: false, image: '/assets/Conjuntos/conjunto_turquesa.png' },
+	{ id: 'D1', name: 'Argolla con grabado', category: 'pulseras', price: 640, material: 'Plata .925', color: 'Plata', featured: false, image: 'assets/Pulseras/argolla_con_grabado.png' },
+	{ id: 'D2', name: 'Brazalete de Canasta', category: 'pulseras', price: 690, material: 'Oro laminado', color: 'Dorado', featured: true, image: 'assets/Pulseras/brazalete_canasta.png' },
+	{ id: 'D3', name: 'Brazalete con Turquesa', category: 'pulseras', price: 720, material: 'Plata .925', color: 'Plata', featured: false, image: 'assets/Pulseras/brazalete_con_turquesa.png' },
+	{ id: 'D4', name: 'Pulsera Box', category: 'pulseras', price: 580, material: 'Plata .925', color: 'Plata', featured: false, image: 'assets/Pulseras/pulsera box.png' },
+	{ id: 'D5', name: 'Pulsera Cordon', category: 'pulseras', price: 750, material: 'Oro laminado', color: 'Dorado', featured: false, image: 'assets/Pulseras/pulsera cordon.png' },
+	{ id: 'D6', name: 'Pulsera Cubana', category: 'pulseras', price: 750, material: 'Oro laminado', color: 'Dorado', featured: false, image: 'assets/Pulseras/pulsera cubana.png' },
+	{ id: 'D5', name: 'Pulsera Cuerda', category: 'pulseras', price: 750, material: 'Oro laminado', color: 'Dorado', featured: false, image: 'assets/Pulseras/Pulsera cuerda.png' },
+	{ id: 'D5', name: 'Pulsera Gucci', category: 'pulseras', price: 750, material: 'Oro laminado', color: 'Dorado', featured: false, image: 'assets/Pulseras/pulsera gucci.png' },
+	{ id: 'E1', name: 'Set Amatista', category: 'conjuntos', price: 450, material: 'Plata .925', color: 'Plata', featured: false, image: 'assets/Conjuntos/conjunto_amatista.png' },
+	{ id: 'E2', name: 'Set Conchas', category: 'conjuntos', price: 520, material: 'Oro laminado', color: 'Dorado', featured: false, image: 'assets/Conjuntos/conjunto_conchas.png' },
+	{ id: 'E3', name: 'Set Ojo de Tigre', category: 'conjuntos', price: 380, material: 'Plata .925', color: 'Plata', featured: false, image: 'assets/Conjuntos/conjunto_ojo_de_tigre.png' },
+	{ id: 'E4', name: 'Set Labradorita', category: 'conjuntos', price: 480, material: 'Oro laminado', color: 'Dorado', featured: false, image: 'assets/Conjuntos/conjunto_ labradorita.png' },
+	{ id: 'E5', name: 'Set Turquesa', category: 'conjuntos', price: 480, material: 'Plata .925', color: 'Plata', featured: false, image: 'assets/Conjuntos/conjunto_turquesa.png' },
 	//{ id: 'F1', name: 'Piedra Obsidiana', category: 'piedras', price: 320, material: 'Obsidiana natural', color: 'Negro', featured: false },
 	//{ id: 'F2', name: 'Piedra Cuarzo', category: 'piedras', price: 280, material: 'Cuarzo rosa', color: 'Rosa', featured: false },
 	//{ id: 'F3', name: 'Piedra Ágata', category: 'piedras', price: 350, material: 'Ágata mexicana', color: 'Multicolor', featured: false },
@@ -775,3 +775,91 @@ document.addEventListener('DOMContentLoaded', function() {
             // Iniciar autoavance al cargar la página
             startAutoSlide();
         });
+
+		// Obtener elementos
+const loginModal = document.getElementById("loginModal");
+const registerModal = document.getElementById("registerModal");
+const closeButtons = document.querySelectorAll(".auth-close");
+
+// Mostrar modal de inicio de sesión
+function openLogin() {
+  loginModal.classList.add("active");
+  registerModal.classList.remove("active");
+}
+
+// Mostrar modal de registro
+function openRegister() {
+  registerModal.classList.add("active");
+  loginModal.classList.remove("active");
+}
+
+// Cerrar todos los modales
+function closeModals() {
+  loginModal.classList.remove("active");
+  registerModal.classList.remove("active");
+}
+
+// Cambiar entre login y registro desde los enlaces
+function switchToRegister() {
+  loginModal.classList.remove("active");
+  registerModal.classList.add("active");
+}
+
+function switchToLogin() {
+  registerModal.classList.remove("active");
+  loginModal.classList.add("active");
+}
+
+// Cerrar al presionar overlay o botón cerrar
+closeButtons.forEach(btn => {
+  btn.addEventListener("click", closeModals);
+});
+
+document.querySelectorAll(".auth-overlay").forEach(overlay => {
+  overlay.addEventListener("click", closeModals);
+});
+
+// Ejemplo: cómo puedes vincularlo con tus botones del frontend
+// (asegúrate que existan estos botones en tu HTML)
+document.getElementById("btnLogin")?.addEventListener("click", openLogin);
+document.getElementById("btnRegister")?.addEventListener("click", openRegister);
+
+// --- Login con Google ---
+window.onload = function() {
+  const googleButton = document.getElementById("googleLogin");
+
+  if (googleButton) {
+    googleButton.addEventListener("click", () => {
+      google.accounts.id.initialize({
+        client_id: "TU_CLIENT_ID_DE_GOOGLE.apps.googleusercontent.com",
+        callback: handleCredentialResponse
+      });
+      google.accounts.id.prompt(); // muestra la ventana emergente
+    });
+  }
+};
+
+// Manejar la respuesta de Google
+function handleCredentialResponse(response) {
+  // Decodificar el JWT para obtener datos del usuario
+  const data = parseJwt(response.credential);
+  console.log("Usuario autenticado con Google:", data);
+
+  alert(`¡Hola, ${data.name}! Has iniciado sesión con Google`);
+}
+
+// Decodificador JWT simple
+function parseJwt(token) {
+  const base64Url = token.split(".")[1];
+  const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+  const jsonPayload = decodeURIComponent(
+    atob(base64)
+      .split("")
+      .map(c => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+      .join("")
+  );
+  return JSON.parse(jsonPayload);
+}
+document.getElementById("appleLogin")?.addEventListener("click", () => {
+  alert("Inicio con Apple disponible próximamente 🍎");
+});

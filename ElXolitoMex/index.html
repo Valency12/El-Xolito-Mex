@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>El Xolito Mex – Joyería</title>
   <meta name="description" content="Joyería mexicana minimalista. Hecha a mano, con alma." />
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,25 +22,24 @@
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="/" aria-label="El Xolito Mex">
-        <img src="/assets/Logos/ElXolotLogo.svg" alt="El Xolito Mex" class="brand-logo" />
+        <img src="" alt="El Xolito Mex" class="brand-logo" />
         <!--<span class="brand-text"></span>-->
       </a>
       <nav class="nav" aria-label="Principal">
         <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
         <ul class="nav-list">
-          <li><a href="/" class="active">Inicio</a></li>
+          <li><a href="#">Inicio</a></li>
           <li><a href="tienda.html">Tienda</a></li>
-          <li><a href="/#ofertas">Ofertas</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="/#historia">Historia</a></li>
-          <li><a href="/#nosotros">Nosotros</a></li>
-          <li><a href="/#contacto">Contacto</a></li>
+          <li><a href="#ofertas">Ofertas</a></li>
+          <li><a href="#nosotros">Nosotros</a></li>
+          <li><a href="#contacto">Contacto</a></li>
         </ul>
       </nav>
       <div class="header-actions">
         <div class="auth-buttons">
-          <button class="btn btn-outline btn-sm" onclick="openLoginModal()">Iniciar Sesión</button>
-          <button class="btn btn-primary btn-sm" onclick="openRegisterModal()">Registrarse</button>
+          <button id="btnLogin" class="btn">Iniciar Sesión</button>
+          <button id="btnRegister" class="btn">Registrarse</button>
+
         </div>
         <button class="cart-toggle" aria-label="Ver carrito" data-count="0">
           <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-cart2"
@@ -66,7 +66,7 @@
         </div>
         <div class="hero-media" aria-hidden="true">
           <img src="assets/Anillos/anillo.png" alt="Joyería mexicana minimalista" class="hero-image" />
-          
+
         </div>
       </div>
     </section>
@@ -114,77 +114,77 @@
 
 
     <section class="piezas-destacadas-container">
-        <h2 class="section-title piezas-destacadas">Piezas Destacadas</h2>
-        
-        <div class="piezas-des-carousel">
-            <button class="piezas-des-arrow piezas-des-arrow-prev">&#10094;</button>
-            
-            <div class="piezas-des-slides">
-                <!-- Diapositiva 1 -->
-                <div class="piezas-des-slide">
-                    <div class="piezas-des-image-container">
-                        
-                            <img src="assets/Pulseras/pulsera gucci.png" alt="Pulsera Vintage Alhambra, 5 motivos">
-                    </div>
-                    <div class="piezas-des-info">
-                        <h3 class="piezas-des-name">Pulsera Vintage Alhambra, 5 motivos</h3>
-                        <p class="piezas-des-materials">Oro blanco, Diamante, Ónice</p>
-                        <p class="piezas-des-price">MX$ 380.000</p>
-                        <button class="btn piezas-des-button"><strong>Ver en la tienda</strong></button>
-                    </div>
-                </div>
-                
-                <!-- Diapositiva 2 -->
-                <div class="piezas-des-slide">
-                    <div class="piezas-des-image-container">
-                        <img src="assets/Anillos/anillo sello.png" alt="Collar Perlas Naturales">
-                    </div>
-                    <div class="piezas-des-info">
-                        <h3 class="piezas-des-name">Collar Perlas Naturales</h3>
-                        <p class="piezas-des-materials">Oro amarillo, Perlas, Diamantes</p>
-                        <p class="piezas-des-price">MX$ 520.000</p>
-                        <button class="piezas-des-button">Ver en la tienda</button>
-                    </div>
-                </div>
-                
-                <!-- Diapositiva 3 -->
-                <div class="piezas-des-slide">
-                    <div class="piezas-des-image-container">
-                        <img src="assets/Anillos/anillo_piedra.png" alt="Anillo Solitario Diamante">
-                    </div>
-                    <div class="piezas-des-info">
-                        <h3 class="piezas-des-name">Anillo Solitario Diamante</h3>
-                        <p class="piezas-des-materials">Platino, Diamante 2ct</p>
-                        <p class="piezas-des-price">MX$ 750.000</p>
-                        <button class="piezas-des-button">Ver en la tienda</button>
-                    </div>
-                </div>
-                
-                <!-- Diapositiva 4 -->
-                <div class="piezas-des-slide">
-                    <div class="piezas-des-image-container">
-                       <img src="assets/Conjuntos/conjunto_conchas.png" alt="Pendientes Esmeralda Colombia">
-                    </div>
-                    <div class="piezas-des-info">
-                        <h3 class="piezas-des-name">Pendientes Esmeralda Colombia</h3>
-                        <p class="piezas-des-materials">Oro blanco, Esmeraldas, Diamantes</p>
-                        <p class="piezas-des-price">MX$ 680.000</p>
-                        <button class="piezas-des-button">Ver en la tienda</button>
-                    </div>
-                </div>
+      <h2 class="section-title piezas-destacadas">Piezas Destacadas</h2>
+
+      <div class="piezas-des-carousel">
+        <button class="piezas-des-arrow piezas-des-arrow-prev">&#10094;</button>
+
+        <div class="piezas-des-slides">
+          <!-- Diapositiva 1 -->
+          <div class="piezas-des-slide">
+            <div class="piezas-des-image-container">
+
+              <img src="assets/Pulseras/pulsera gucci.png" alt="Pulsera Vintage Alhambra, 5 motivos">
             </div>
-            
-            <button class="piezas-des-arrow piezas-des-arrow-next">&#10095;</button>
-        </div>
-        
-        <div class="piezas-des-controls">
-            <div class="piezas-des-dots">
-                <!-- Los puntos se generarán dinámicamente con JavaScript -->
+            <div class="piezas-des-info">
+              <h3 class="piezas-des-name">Pulsera Vintage Alhambra, 5 motivos</h3>
+              <p class="piezas-des-materials">Oro blanco, Diamante, Ónice</p>
+              <p class="piezas-des-price">MX$ 380.000</p>
+              <button class="btn piezas-des-button"><strong>Ver en la tienda</strong></button>
             </div>
+          </div>
+
+          <!-- Diapositiva 2 -->
+          <div class="piezas-des-slide">
+            <div class="piezas-des-image-container">
+              <img src="assets/Anillos/anillo sello.png" alt="Collar Perlas Naturales">
+            </div>
+            <div class="piezas-des-info">
+              <h3 class="piezas-des-name">Collar Perlas Naturales</h3>
+              <p class="piezas-des-materials">Oro amarillo, Perlas, Diamantes</p>
+              <p class="piezas-des-price">MX$ 520.000</p>
+              <button class="piezas-des-button">Ver en la tienda</button>
+            </div>
+          </div>
+
+          <!-- Diapositiva 3 -->
+          <div class="piezas-des-slide">
+            <div class="piezas-des-image-container">
+              <img src="assets/Anillos/anillo_piedra.png" alt="Anillo Solitario Diamante">
+            </div>
+            <div class="piezas-des-info">
+              <h3 class="piezas-des-name">Anillo Solitario Diamante</h3>
+              <p class="piezas-des-materials">Platino, Diamante 2ct</p>
+              <p class="piezas-des-price">MX$ 750.000</p>
+              <button class="piezas-des-button">Ver en la tienda</button>
+            </div>
+          </div>
+
+          <!-- Diapositiva 4 -->
+          <div class="piezas-des-slide">
+            <div class="piezas-des-image-container">
+              <img src="assets/Conjuntos/conjunto_conchas.png" alt="Pendientes Esmeralda Colombia">
+            </div>
+            <div class="piezas-des-info">
+              <h3 class="piezas-des-name">Pendientes Esmeralda Colombia</h3>
+              <p class="piezas-des-materials">Oro blanco, Esmeraldas, Diamantes</p>
+              <p class="piezas-des-price">MX$ 680.000</p>
+              <button class="piezas-des-button">Ver en la tienda</button>
+            </div>
+          </div>
         </div>
+
+        <button class="piezas-des-arrow piezas-des-arrow-next">&#10095;</button>
+      </div>
+
+      <div class="piezas-des-controls">
+        <div class="piezas-des-dots">
+          <!-- Los puntos se generarán dinámicamente con JavaScript -->
+        </div>
+      </div>
     </section>
     </section>
-        
+
     </section>
 
     <section id="testimonios" class="testimonials">
@@ -265,16 +265,28 @@
 
     <!-- Nuestro taller -->
     <section class="taller-collage">
-      <h2 class="section-title taller-title">El Alma Hecha Joya: Nuestra Historia en el Taller</h2>
-      <div class="taller-collage-grid">
-        <div class="taller-item item1"><img src="assets/img.jpeg" alt="Taller 1"></div>
-        <div class="taller-item item2"><img src="assets/img.jpeg" alt="Taller 2"></div>
-        <div class="taller-item item3"><img src="assets/img.jpeg" alt="Taller 3"></div>
+           <div class="taller-collage-grid">
+        <div class="taller-item item1"><img src="assets/Taller/taller1.jpeg" alt="Taller 1"></div>
+        <div class="taller-item item2"><img src="assets/Taller/taller2.jpeg" alt="Taller 2"></div>
+        <div class="taller-item item3"><img src="assets/Taller/taller3.jpeg" alt="Taller 3"></div>
       </div>
       <div class="taller-content">
+        <h2 class="section-title taller-title">El Alma Hecha Joya: Nuestra Historia en el Taller</h2>
+ 
         <p class="p-taller">
-    En el corazón de nuestra joyería late un <strong>espacio mágico</strong> donde los <em>metales preciosos</em> y las <em>gemas</em> cobran vida: nuestro <strong>taller propio</strong>. Aquí, cada creación nace de las manos del <strong>propio fundador</strong>, quien comenzó este viaje hace más de dos décadas como <em>aprendiz</em> en el antiguo taller de su abuelo. Lo que empezó como <em>curiosidad infantil</em> viendo transformar el <strong>oro bruto</strong> en delicadas <em>filigranas</em>, se convirtió en una <strong>pasión</strong> que lo llevó a dominar cada técnica: desde la <em>fundición tradicional</em> hasta el moderno <strong>diseño CAD</strong>. Hoy, este <em>conocimiento ancestral</em> combinado con <em>innovación</em> nos permite ofrecer <strong>piezas únicas</strong>, donde controlamos cada etapa del <em>proceso creativo</em>, garantizando no solo la <strong>autenticidad</strong> y <strong>calidad excepcional</strong>, sino imprimiendo en cada joya esa <em>esencia personal</em> que solo puede nacer cuando <strong>quien diseña es también quien forja</strong> con sus propias manos los <em>sueños en metal y piedra</em>.
-</p>
+          En el corazón de nuestra joyería late un <strong>espacio mágico</strong> donde los <em>metales preciosos</em>
+          y las <em>gemas</em> cobran vida: nuestro <strong>taller propio</strong>. Aquí, cada creación nace de las
+          manos del <strong>propio fundador</strong>, quien comenzó este viaje hace más de dos décadas como
+          <em>aprendiz</em> en el antiguo taller de su abuelo. Lo que empezó como <em>curiosidad infantil</em> viendo
+          transformar el <strong>oro bruto</strong> en delicadas <em>filigranas</em>, se convirtió en una
+          <strong>pasión</strong> que lo llevó a dominar cada técnica: desde la <em>fundición tradicional</em> hasta el
+          moderno <strong>diseño CAD</strong>. Hoy, este <em>conocimiento ancestral</em> combinado con
+          <em>innovación</em> nos permite ofrecer <strong>piezas únicas</strong>, donde controlamos cada etapa del
+          <em>proceso creativo</em>, garantizando no solo la <strong>autenticidad</strong> y <strong>calidad
+            excepcional</strong>, sino imprimiendo en cada joya esa <em>esencia personal</em> que solo puede nacer
+          cuando <strong>quien diseña es también quien forja</strong> con sus propias manos los <em>sueños en metal y
+            piedra</em>.
+        </p>
       </div>
     </section>
 
@@ -304,74 +316,78 @@
   </main>
 
   <footer class="site-footer">
-        <div class="border-mex"></div>
-        <div class="container footer-content">
-            <div class="footer-main">
-                <div class="footer-brand">
-                    <a class="brand" href="/">
-                        <div class="brand-logo">XM</div>
-                        <span class="brand-text">El Xolito Mex</span>
-                    </a>
-                    <p class="footer-description">Joyería mexicana minimalista hecha a mano. Cada pieza cuenta una historia única.</p>
-                    <div class="social-links">
-                        <a href="https://www.instagram.com/_elxolo_mx/" aria-label="Instagram">
-                            <svg class="instagram-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16">
-                                <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.facebook.com/profile.php?id=61574165421784" aria-label="Facebook">
-                            <svg class="facebook-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16">
-                                <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
-                            </svg>
-                        </a>
-                        <a href="https://wa.me/5214445428475" aria-label="WhatsApp">
-                            <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16">
-                                <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <h4>Tienda</h4>
-                        <ul>
-                            <li><a href="tienda.html">Todos los productos</a></li>
-                            <li><a href="/#ofertas">Ofertas</a></li>
-                            <li><a href="tienda.html?filter=anillos">Anillos</a></li>
-                            <li><a href="tienda.html?filter=aretes">Aretes</a></li>
-                            <li><a href="tienda.html?filter=collares">Collares</a></li>
-                            <li><a href="tienda.html?filter=pulseras">Pulseras</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Empresa</h4>
-                        <ul>
-                            <li><a href="/#historia">Nuestra historia</a></li>
-                            <li><a href="/#nosotros">Nosotros</a></li>
-                            <li><a href="/blog.html">Blog</a></li>
-                            <li><a href="/#contacto">Contacto</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Atención</h4>
-                        <ul>
-                            <li><a href="#">Preguntas frecuentes</a></li>
-                            <li><a href="#">Envíos y devoluciones</a></li>
-                            <li><a href="#">Cuidado de joyas</a></li>
-                            <li><a href="#">Garantía</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p class="foot-note">© <span id="year">2024</span> El Xolito Mex. Todos los derechos reservados.</p>
-                <div class="footer-legal">
-                    <a href="#">Términos y condiciones</a>
-                    <a href="#">Política de privacidad</a>
-                </div>
-            </div>
+    <div class="border-mex"></div>
+    <div class="container footer-content">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <a class="brand" href="/">
+            <div class="brand-logo">XM</div>
+            <span class="brand-text">El Xolito Mex</span>
+          </a>
+          <p class="footer-description">Joyería mexicana minimalista hecha a mano. Cada pieza cuenta una historia única.
+          </p>
+          <div class="social-links">
+            <a href="https://www.instagram.com/_elxolo_mx/" aria-label="Instagram">
+              <svg class="instagram-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16">
+                <path
+                  d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334" />
+              </svg>
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=61574165421784" aria-label="Facebook">
+              <svg class="facebook-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16">
+                <path
+                  d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951" />
+              </svg>
+            </a>
+            <a href="https://wa.me/5214445428475" aria-label="WhatsApp">
+              <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16">
+                <path
+                  d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232" />
+              </svg>
+            </a>
+          </div>
         </div>
-    </footer>
+        <div class="footer-links">
+          <div class="footer-column">
+            <h4>Tienda</h4>
+            <ul>
+              <li><a href="tienda.html">Todos los productos</a></li>
+              <li><a href="/#ofertas">Ofertas</a></li>
+              <li><a href="tienda.html?filter=anillos">Anillos</a></li>
+              <li><a href="tienda.html?filter=aretes">Aretes</a></li>
+              <li><a href="tienda.html?filter=collares">Collares</a></li>
+              <li><a href="tienda.html?filter=pulseras">Pulseras</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Empresa</h4>
+            <ul>
+              <li><a href="/#historia">Nuestra historia</a></li>
+              <li><a href="/#nosotros">Nosotros</a></li>
+              <li><a href="/blog.html">Blog</a></li>
+              <li><a href="/#contacto">Contacto</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Atención</h4>
+            <ul>
+              <li><a href="#">Preguntas frecuentes</a></li>
+              <li><a href="#">Envíos y devoluciones</a></li>
+              <li><a href="#">Cuidado de joyas</a></li>
+              <li><a href="#">Garantía</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="foot-note">© <span id="year">2024</span> El Xolito Mex. Todos los derechos reservados.</p>
+        <div class="footer-legal">
+          <a href="#">Términos y condiciones</a>
+          <a href="#">Política de privacidad</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
 
   <!-- Login Modal -->
@@ -392,7 +408,18 @@
             <label for="loginPassword">Contraseña</label>
             <input type="password" id="loginPassword" required>
           </div>
+          <div class="separator"><span>or</span></div>
+          <div class="social-login">
+            <button class="social-btn" id="googleLogin">
+              <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google"> Iniciar con Google
+            </button>
+            <button class="social-btn" id="appleLogin">
+              <img src="https://www.svgrepo.com/show/452196/apple-black.svg" alt="Apple"> Iniciar con Apple
+            </button>
+          </div>
+          <div class="form-inicio">
           <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+          </div>
         </form>
         <p class="auth-switch">¿No tienes cuenta? <a href="#" onclick="switchToRegister()">Regístrate aquí</a></p>
       </div>
@@ -421,7 +448,19 @@
             <label for="registerPassword">Contraseña</label>
             <input type="password" id="registerPassword" required>
           </div>
+          <div class="separator"><span>or</span></div>
+          <div class="social-login">
+            <button class="social-btn" id="googleLogin">
+              <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google"> Iniciar con Google
+            </button>
+            <button class="social-btn" id="appleLogin">
+              <img src="https://www.svgrepo.com/show/452196/apple-black.svg" alt="Apple"> Iniciar con Apple
+            </button>
+          </div>
+
+          <div class="form-inicio">
           <button type="submit" class="btn btn-primary">Crear Cuenta</button>
+          </div>
         </form>
         <p class="auth-switch">¿Ya tienes cuenta? <a href="#" onclick="switchToLogin()">Inicia sesión aquí</a></p>
       </div>
