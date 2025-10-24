@@ -677,3 +677,101 @@ window.closeBlogModal = function (id) {
 		document.body.style.overflow = '';
 	}
 };
+
+document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.querySelector('.piezas-des-carousel');
+            const slidesContainer = document.querySelector('.piezas-des-slides');
+            const slides = document.querySelectorAll('.piezas-des-slide');
+            const prevBtn = document.querySelector('.piezas-des-arrow-prev');
+            const nextBtn = document.querySelector('.piezas-des-arrow-next');
+            const dotsContainer = document.querySelector('.piezas-des-dots');
+            
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+            let autoSlideInterval;
+            
+            // Crear puntos de navegación
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('piezas-des-dot');
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
+            
+            const dots = document.querySelectorAll('.piezas-des-dot');
+            
+            // Función para ir a una diapositiva específica
+            function goToSlide(slideIndex) {
+                currentSlide = slideIndex;
+                updateCarousel();
+                resetAutoSlide(); // Reiniciar el autoavance cuando se navega manualmente
+            }
+            
+            // Función para actualizar el carrusel
+            function updateCarousel() {
+                slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+                
+                // Actualizar puntos activos
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentSlide);
+                });
+            }
+            
+            // Función para avanzar al siguiente slide
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateCarousel();
+            }
+            
+            // Función para retroceder al slide anterior
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                updateCarousel();
+            }
+            
+            // Función para iniciar el autoavance
+            function startAutoSlide() {
+                autoSlideInterval = setInterval(nextSlide, 4000); // Cambia cada 4 segundos
+            }
+            
+            // Función para detener el autoavance
+            function stopAutoSlide() {
+                clearInterval(autoSlideInterval);
+            }
+            
+            // Función para reiniciar el autoavance
+            function resetAutoSlide() {
+                stopAutoSlide();
+                startAutoSlide();
+            }
+            
+            // Eventos para las flechas
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                resetAutoSlide();
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                resetAutoSlide();
+            });
+            
+            // Pausar autoavance al pasar el mouse
+            carousel.addEventListener('mouseenter', stopAutoSlide);
+            carousel.addEventListener('mouseleave', startAutoSlide);
+            
+            // Navegación con teclado
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                    resetAutoSlide();
+                } else if (e.key === 'ArrowRight') {
+                    nextSlide();
+                    resetAutoSlide();
+                }
+            });
+            
+            // Iniciar autoavance al cargar la página
+            startAutoSlide();
+        });
