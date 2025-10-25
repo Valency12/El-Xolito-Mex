@@ -162,35 +162,75 @@ function createPlaceholderSVG(id) {
 	`;
 }
 
-function renderProducts(list, containerId = 'productGrid') {
-	const container = document.getElementById(containerId);
-	if (!container) return;
 
-	container.innerHTML = '';
-	if (!list.length) {
-		container.innerHTML = '<p>No encontramos resultados. Intenta otra búsqueda o filtro.</p>';
-		return;
-	}
-	const frag = document.createDocumentFragment();
-	for (const p of list) {
-		const card = document.createElement('article');
-		card.className = 'card';
-		card.innerHTML = `
-			<div class="card-media">
-				${p.image ? `<img src="${p.image}" alt="${p.name}">` : createPlaceholderSVG(p.id)}
-				<button class="btn btn-outline" onclick="cart.addItem('${p.id}')">Agregar al carrito</button>
-
-			</div>
-			<div class="card-body">
-				<h3>${p.name}</h3>
-				<div class="price">${formatCurrency(p.price)}</div>
-	
-							</div>
-		`;
-		frag.appendChild(card);
-	}
-	container.appendChild(frag);
+// Ejemplo de renderizado simple para cada producto
+function renderProducts(products) {
+  const grid = document.getElementById('productGrid');
+  grid.innerHTML = '';
+  products.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.innerHTML = `
+      <div class="product-image">
+        <img src="${p.image}" alt="${p.name}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9IiNmNWY1ZjUiLz48dGV4dCB4PSIyMDAiIHk9IjIwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgZmlsbD0iIzk5OSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE4Ij5JbWFnZW4gbm8gZGlzcG9uaWJsZTwvdGV4dD48L3N2Zz4='">
+      </div>
+      <div class="product-name">${p.name}</div>
+	  <div class="product-row">
+      <div class="product-price">${formatCurrency(p.price)}</div>
+      <button class="btn-add-to-cart" data-product-id="${p.id}">
+	  <span class="icon-default">
+    <!-- SVG normal -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" class="bi bi-cart-plus" viewBox="0 0 16 16">
+      <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z"/>
+      <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+    </svg>
+  </span>
+  <span class="icon-hover">
+    <!-- SVG hover (relleno, por ejemplo bi-cart-plus-fill) -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
+      <path d="M6 14a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+      <path d="M6 11.5a.5.5 0 0 1 .5-.5H8V9.5a.5.5 0 0 1 1 0V11h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V12H6.5a.5.5 0 0 1-.5-.5z"/>
+      <path d="M.5 1a.5.5 0 0 1 .5-.5h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1z"/>
+    </svg>
+  </span>
+</div>
+	  </button>
+    `;
+    // Si quieres que al hacer click en la tarjeta se abra el modal:
+    card.addEventListener('click', (e) => {
+      // Evita que el botón de agregar al carrito abra el modal
+      if (e.target.classList.contains('btn-add-to-cart')) return;
+      openProductDetail(p.id);
+    });
+    // Botón de agregar al carrito
+    card.querySelector('.btn-add-to-cart').addEventListener('click', (e) => {
+      e.stopPropagation();
+      cart.addItem(p.id, 1);
+      showAddToCartMessage(p.id, 1);
+    });
+    grid.appendChild(card);
+  });
 }
+
+function showProductModal(product) {
+  const modal = document.getElementById('productModal');
+  const detail = document.getElementById('productDetail');
+  detail.innerHTML = `
+    <img src="${product.image}" alt="${product.name}">
+    <h2>${product.name}</h2>
+    <div>${product.material}</div>
+    <div class="price">$${product.price}</div>
+    <!-- Más info aquí -->
+  `;
+  modal.setAttribute('aria-hidden', 'false');
+  modal.style.display = 'block';
+}
+
+// Cerrar modal
+document.querySelector('.product-close').onclick = function() {
+  document.getElementById('productModal').setAttribute('aria-hidden', 'true');
+  document.getElementById('productModal').style.display = 'none';
+};
 
 function renderFeaturedCarousel() {
   const featured = PRODUCTS.filter(p => p.featured);
@@ -658,8 +698,34 @@ function main() {
 	if (document.getElementById('featuredCarousel')) {
 		renderFeaturedCarousel();
 	}
+  
+  // Setup product modal events
+  setupProductModal();
 }
 
+function setupProductModal() {
+  const modal = document.getElementById('productModal');
+  if (!modal) return;
+
+  // Cerrar al hacer click en el overlay
+  const overlay = modal.querySelector('.product-overlay');
+  if (overlay) {
+    overlay.addEventListener('click', closeProductModal);
+  }
+
+  // Cerrar al hacer click en el botón de cerrar
+  const closeBtn = modal.querySelector('.product-close');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeProductModal);
+  }
+
+  // Cerrar con la tecla Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') {
+      closeProductModal();
+    }
+  });
+}
 document.addEventListener('DOMContentLoaded', main);
 
 // Blog Modal Functions
@@ -863,3 +929,210 @@ function parseJwt(token) {
 document.getElementById("appleLogin")?.addEventListener("click", () => {
   alert("Inicio con Apple disponible próximamente 🍎");
 });
+
+
+function openProductDetail(productId) {
+  console.log('Abriendo producto:', productId); // Para debug
+  const product = PRODUCTS.find(p => p.id === productId);
+  if (!product) {
+    console.error('Producto no encontrado:', productId);
+    return;
+  }
+
+  const modal = document.getElementById('productModal');
+  const detail = document.getElementById('productDetail');
+
+  if (!modal || !detail) {
+    console.error('Modal no encontrado en el DOM');
+    return;
+  }
+
+  detail.innerHTML = `
+    <div class="product-detail-container">
+      <div class="product-detail-image">
+        <img src="${product.image}" alt="${product.name}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNmNWY1ZjUiLz48dGV4dCB4PSIyMDAiIHk9IjIwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgZmlsbD0iIzk5OSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE4Ij5JbWFnZW4gbm8gZGlzcG9uaWJsZTwvdGV4dD48L3N2Zz4='">
+      </div>
+      <div class="product-detail-info">
+        <h2>${product.name}</h2>
+        <div class="product-price">${formatCurrency(product.price)}</div>
+        
+        <div class="product-meta">
+          <div class="meta-item">
+            <strong>Material:</strong>
+            <span>${product.material}</span>
+          </div>
+          <div class="meta-item">
+            <strong>Color:</strong>
+            <span>${product.color}</span>
+          </div>
+          <div class="meta-item">
+            <strong>Categoría:</strong>
+            <span>${product.category.charAt(0).toUpperCase() + product.category.slice(1)}</span>
+          </div>
+          <div class="meta-item">
+            <strong>SKU:</strong>
+            <span>${product.id}</span>
+          </div>
+        </div>
+
+        <div class="product-options">
+          <div class="quantity-selector">
+            <label for="productQuantity">Cantidad:</label>
+            <div class="qty-controls">
+              <button type="button" onclick="decreaseQuantity()">-</button>
+              <input type="number" id="productQuantity" value="1" min="1" max="10">
+              <button type="button" onclick="increaseQuantity()">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-actions">
+          <button class="btn btn-primary btn-full" onclick="addToCartFromDetail('${product.id}')">
+            Añadir al carrito
+          </button>
+          <button class="btn btn-outline btn-full" onclick="addToCartAndCheckout('${product.id}')">
+            Comprar ahora
+          </button>
+        </div>
+
+        <div class="product-features">
+          <div class="feature">
+            <span class="feature-icon">🚚</span>
+            <span>Envío gratis en compras mayores a $879</span>
+          </div>
+          <div class="feature">
+            <span class="feature-icon">🔒</span>
+            <span>Pago seguro</span>
+          </div>
+          <div class="feature">
+            <span class="feature-icon">↩️</span>
+            <span>Devoluciones en 30 días</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  
+  // Guardar el producto actual para usar en las funciones de cantidad
+  window.currentProductId = productId;
+}
+
+
+// Funciones auxiliares para controlar la cantidad
+function increaseQuantity() {
+  const quantityInput = document.getElementById('productQuantity');
+  if (!quantityInput) return;
+  
+  const currentValue = parseInt(quantityInput.value);
+  if (currentValue < 10) {
+    quantityInput.value = currentValue + 1;
+  }
+}
+
+function decreaseQuantity() {
+  const quantityInput = document.getElementById('productQuantity');
+  if (!quantityInput) return;
+  
+  const currentValue = parseInt(quantityInput.value);
+  if (currentValue > 1) {
+    quantityInput.value = currentValue - 1;
+  }
+}
+
+// Función para añadir al carrito desde el detalle
+function addToCartFromDetail(productId) {
+  const quantityInput = document.getElementById('productQuantity');
+  if (!quantityInput) return;
+  
+  const quantity = parseInt(quantityInput.value);
+  cart.addItem(productId, quantity);
+  closeProductModal();
+  
+  // Mostrar mensaje de confirmación
+  showAddToCartMessage(productId, quantity);
+}
+
+// Función para añadir y proceder al checkout
+function addToCartAndCheckout(productId) {
+  const quantityInput = document.getElementById('productQuantity');
+  if (!quantityInput) return;
+  
+  const quantity = parseInt(quantityInput.value);
+  cart.addItem(productId, quantity);
+  closeProductModal();
+  
+  // Abrir el carrito
+  const cartModal = document.getElementById('cartModal');
+  if (cartModal) {
+    cartModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+// Mensaje de confirmación al añadir al carrito
+
+function showAddToCartMessage(productId, quantity) {
+  const product = PRODUCTS.find(p => p.id === productId);
+  if (!product) return;
+
+  let messageContainer = document.getElementById('addToCartMessage');
+  if (!messageContainer) {
+    messageContainer = document.createElement('div');
+    messageContainer.id = 'addToCartMessage';
+    messageContainer.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 16px 20px;
+      border-radius: 8px;
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      z-index: 10000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 300px;
+      transition: all 0.3s ease;
+    `;
+    document.body.appendChild(messageContainer);
+  }
+
+  messageContainer.innerHTML = `
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <span style="color: #28a745; font-size: 1.2rem;">✓</span>
+      <div>
+        <strong style="display: block; margin-bottom: 4px;">¡Producto añadido!</strong>
+        ${quantity}x ${product.name} - ${formatCurrency(product.price * quantity)}
+      </div>
+    </div>
+  `;
+
+  messageContainer.style.display = 'block';
+  messageContainer.style.opacity = '1';
+  
+  setTimeout(() => {
+    if (messageContainer.parentNode) {
+      messageContainer.style.opacity = '0';
+      setTimeout(() => {
+        messageContainer.style.display = 'none';
+      }, 300);
+    }
+  }, 3000);
+}
+
+
+document.querySelector('.product-close').addEventListener('click', closeProductModal);
+document.querySelector('.product-overlay').addEventListener('click', closeProductModal);
+
+function closeProductModal() {
+  const modal = document.getElementById('productModal');
+  if (modal) {
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+}
+
