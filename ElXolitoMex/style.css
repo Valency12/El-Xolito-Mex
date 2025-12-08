@@ -2013,7 +2013,6 @@ img{ display:block; max-width:100%; height:auto; }
             display: flex;
             justify-content: center;
             align-items: center;
-            border: 1px solid #333;
             overflow: hidden;
         }
 

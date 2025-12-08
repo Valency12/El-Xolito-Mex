@@ -50,7 +50,7 @@
         </button>
       </div>
     </div>
-     <div class="border-mex"></div>
+    <div class="border-mex"></div>
   </header>
 
   <main>
@@ -119,10 +119,10 @@
 
       <div class="piezas-des-carousel">
         <button class="piezas-des-arrow piezas-des-arrow-prev">&#10094;</button>
-
-        <div class="piezas-des-slides">
-          <!-- Diapositiva 1 -->
-          <div class="piezas-des-slide">
+        <div class="piezas-des-slides" id="featuredCarousel">
+          <div class="piezas-des-slides">
+            <!-- Diapositiva 1 -->
+            <div class="piezas-des-slide">
             <div class="piezas-des-image-container">
 
               <img src="assets/Pulseras/pulsera gucci.png" alt="Pulsera Vintage Alhambra, 5 motivos">
@@ -133,56 +133,53 @@
               <p class="piezas-des-price">MX$ 380.000</p>
               <button class="btn piezas-des-button"><strong>Ver en la tienda</strong></button>
             </div>
+            </div>
+            <!-- Diapositiva 2 -->
+             <div class="piezas-des-slide">
+              <div class="piezas-des-image-container">
+                <img src="assets/Anillos/anillo sello.png" alt="Collar Perlas Naturales">
+              </div>
+              <div class="piezas-des-info">
+                <h3 class="piezas-des-name">Collar Perlas Naturales</h3>
+                <p class="piezas-des-materials">Oro amarillo, Perlas, Diamantes</p>
+                <p class="piezas-des-price">MX$ 520.000</p>
+                <button class="piezas-des-button">Ver en la tienda</button>
+              </div>
+              </div>
+            <!-- Diapositiva 3 -->
+              <div class="piezas-des-slide">
+              <div class="piezas-des-image-container">
+                <img src="assets/Anillos/anillo_piedra.png" alt="Anillo Solitario Diamante">
+              </div>
+              <div class="piezas-des-info">
+                <h3 class="piezas-des-name">Anillo Solitario Diamante</h3>
+                <p class="piezas-des-materials">Platino, Diamante 2ct</p>
+                <p class="piezas-des-price">MX$ 750.000</p>
+                <button class="piezas-des-button">Ver en la tienda</button>
+              </div>
+              </div>
+            <!-- Diapositiva 4 -->
+             <div class="piezas-des-slide">
+              <div class="piezas-des-image-container">
+                <img src="assets/Conjuntos/conjunto_conchas.png" alt="Pendientes Esmeralda Colombia">
+              </div>
+              <div class="piezas-des-info">
+                <h3 class="piezas-des-name">Pendientes Esmeralda Colombia</h3>
+                <p class="piezas-des-materials">Oro blanco, Esmeraldas, Diamantes</p>
+                <p class="piezas-des-price">MX$ 680.000</p>
+                <button class="piezas-des-button">Ver en la tienda</button>
+              </div>
+            </div>
+            </div>
           </div>
-
-          <!-- Diapositiva 2 -->
-          <div class="piezas-des-slide">
-            <div class="piezas-des-image-container">
-              <img src="assets/Anillos/anillo sello.png" alt="Collar Perlas Naturales">
-            </div>
-            <div class="piezas-des-info">
-              <h3 class="piezas-des-name">Collar Perlas Naturales</h3>
-              <p class="piezas-des-materials">Oro amarillo, Perlas, Diamantes</p>
-              <p class="piezas-des-price">MX$ 520.000</p>
-              <button class="piezas-des-button">Ver en la tienda</button>
-            </div>
-          </div>
-
-          <!-- Diapositiva 3 -->
-          <div class="piezas-des-slide">
-            <div class="piezas-des-image-container">
-              <img src="assets/Anillos/anillo_piedra.png" alt="Anillo Solitario Diamante">
-            </div>
-            <div class="piezas-des-info">
-              <h3 class="piezas-des-name">Anillo Solitario Diamante</h3>
-              <p class="piezas-des-materials">Platino, Diamante 2ct</p>
-              <p class="piezas-des-price">MX$ 750.000</p>
-              <button class="piezas-des-button">Ver en la tienda</button>
-            </div>
-          </div>
-
-          <!-- Diapositiva 4 -->
-          <div class="piezas-des-slide">
-            <div class="piezas-des-image-container">
-              <img src="assets/Conjuntos/conjunto_conchas.png" alt="Pendientes Esmeralda Colombia">
-            </div>
-            <div class="piezas-des-info">
-              <h3 class="piezas-des-name">Pendientes Esmeralda Colombia</h3>
-              <p class="piezas-des-materials">Oro blanco, Esmeraldas, Diamantes</p>
-              <p class="piezas-des-price">MX$ 680.000</p>
-              <button class="piezas-des-button">Ver en la tienda</button>
-            </div>
-          </div>
+          <button class="piezas-des-arrow piezas-des-arrow-next">&#10095;</button>
         </div>
 
-        <button class="piezas-des-arrow piezas-des-arrow-next">&#10095;</button>
-      </div>
-
-      <div class="piezas-des-controls">
-        <div class="piezas-des-dots">
-          <!-- Los puntos se generarán dinámicamente con JavaScript -->
+        <div class="piezas-des-controls">
+          <div class="piezas-des-dots">
+            <!-- Los puntos se generarán dinámicamente con JavaScript -->
+          </div>
         </div>
-      </div>
     </section>
     </section>
 
@@ -266,14 +263,14 @@
 
     <!-- Nuestro taller -->
     <section class="taller-collage">
-           <div class="taller-collage-grid">
+      <div class="taller-collage-grid">
         <div class="taller-item item1"><img src="assets/Taller/taller1.jpeg" alt="Taller 1"></div>
         <div class="taller-item item2"><img src="assets/Taller/taller2.jpeg" alt="Taller 2"></div>
         <div class="taller-item item3"><img src="assets/Taller/taller3.jpeg" alt="Taller 3"></div>
       </div>
       <div class="taller-content">
         <h2 class="section-title taller-title">El Alma Hecha Joya: Nuestra Historia en el Taller</h2>
- 
+
         <p class="p-taller">
           En el corazón de nuestra joyería late un <strong>espacio mágico</strong> donde los <em>metales preciosos</em>
           y las <em>gemas</em> cobran vida: nuestro <strong>taller propio</strong>. Aquí, cada creación nace de las
@@ -419,7 +416,7 @@
             </button>
           </div>
           <div class="form-inicio">
-          <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
           </div>
         </form>
         <p class="auth-switch">¿No tienes cuenta? <a href="#" onclick="switchToRegister()">Regístrate aquí</a></p>
@@ -460,7 +457,7 @@
           </div>
 
           <div class="form-inicio">
-          <button type="submit" class="btn btn-primary">Crear Cuenta</button>
+            <button type="submit" class="btn btn-primary">Crear Cuenta</button>
           </div>
         </form>
         <p class="auth-switch">¿Ya tienes cuenta? <a href="#" onclick="switchToLogin()">Inicia sesión aquí</a></p>
