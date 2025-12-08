@@ -1984,14 +1984,20 @@ img{ display:block; max-width:100%; height:auto; }
         /* Contenedor del carrusel */
         .piezas-des-carousel {
             position: relative;
-            overflow: hidden;
             margin-bottom: 30px;
+        }
+
+        /* Contenedor interno con overflow hidden */
+        .piezas-des-slides-container {
+            overflow: hidden;
+            width: 100%;
         }
 
         /* Contenedor de las diapositivas */
         .piezas-des-slides {
             display: flex;
             transition: transform 0.5s ease-in-out;
+            width: 100%;
         }
 
         /* Cada diapositiva */
@@ -2467,8 +2473,9 @@ body {
   z-index: 1000;
 }
 
-.auth-modal.active {
-  display: flex;
+.auth-modal.active,
+.auth-modal[aria-hidden="false"] {
+  display: flex !important;
   align-items: center;
   justify-content: center;
 }

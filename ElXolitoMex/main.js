@@ -1,3 +1,4 @@
+
 const PRODUCTS = [
 	{ id: 'A1', name: 'Anillo Sello', category: 'anillos', price: 890, material: 'Plata .925', color: 'Plata', featured: true, image: 'assets/Anillos/anillo sello.png' },
 	{ id: 'A2', name: 'Anillo Labradorita', category: 'anillos', price: 950, material: 'Oro laminado', color: 'Dorado', featured: false, image: 'assets/Anillos/anillo_piedra.png' },
@@ -226,11 +227,17 @@ function showProductModal(product) {
   modal.style.display = 'block';
 }
 
-// Cerrar modal
-document.querySelector('.product-close').onclick = function() {
-  document.getElementById('productModal').setAttribute('aria-hidden', 'true');
-  document.getElementById('productModal').style.display = 'none';
-};
+// Cerrar modal - solo si el elemento existe
+const productCloseBtn = document.querySelector('.product-close');
+if (productCloseBtn) {
+  productCloseBtn.onclick = function() {
+    const productModal = document.getElementById('productModal');
+    if (productModal) {
+      productModal.setAttribute('aria-hidden', 'true');
+      productModal.style.display = 'none';
+    }
+  };
+}
 
 function renderFeaturedCarousel() {
   const featured = PRODUCTS.filter(p => p.featured);
@@ -332,15 +339,22 @@ function setupNav() {
 }
 
 function setupCart() {
+	console.log('setupCart called');
 	const cartToggle = document.querySelector('.cart-toggle');
 	const cartModal = document.getElementById('cartModal');
 	const cartClose = document.querySelector('.cart-close');
 	const cartOverlay = document.querySelector('.cart-overlay');
 
-	if (!cartToggle || !cartModal) return;
+	console.log('Cart elements found - Toggle:', !!cartToggle, 'Modal:', !!cartModal);
+	if (!cartToggle || !cartModal) {
+		console.warn('Cart toggle or modal not found!');
+		return;
+	}
 
 	cartToggle.addEventListener('click', () => {
+		console.log('Cart toggle clicked');
 		cartModal.setAttribute('aria-hidden', 'false');
+		console.log('Cart modal aria-hidden set to false');
 		document.body.style.overflow = 'hidden';
 	});
 
@@ -362,17 +376,38 @@ function setupCart() {
 
 // Auth Modal Functions
 window.openLoginModal = function () {
+	console.log('openLoginModal called');
 	const modal = document.getElementById('loginModal');
+	const registerModal = document.getElementById('registerModal');
+	console.log('Login modal found:', !!modal);
 	if (modal) {
 		modal.setAttribute('aria-hidden', 'false');
+		console.log('Login modal aria-hidden set to false');
+		if (registerModal) {
+			registerModal.setAttribute('aria-hidden', 'true');
+		}
 		document.body.style.overflow = 'hidden';
+	} else {
+		console.error('Login modal not found!');
 	}
 };
 
 // Abrir modal de registro
 window.openRegisterModal = function () {
-	document.getElementById('registerModal').setAttribute('aria-hidden', 'false');
-	document.body.style.overflow = 'hidden'; // Opcional: evita scroll de fondo
+	console.log('openRegisterModal called');
+	const loginModal = document.getElementById('loginModal');
+	const registerModal = document.getElementById('registerModal');
+	console.log('Register modal found:', !!registerModal);
+	if (registerModal) {
+		registerModal.setAttribute('aria-hidden', 'false');
+		console.log('Register modal aria-hidden set to false');
+		if (loginModal) {
+			loginModal.setAttribute('aria-hidden', 'true');
+		}
+		document.body.style.overflow = 'hidden';
+	} else {
+		console.error('Register modal not found!');
+	}
 };
 
 function closeAuthModal() {
@@ -383,23 +418,28 @@ function closeAuthModal() {
 	document.body.style.overflow = '';
 }
 
-// Cerrar modal de registro
-document.querySelectorAll('.auth-close').forEach(btn => {
-	btn.addEventListener('click', () => {
-		document.getElementById('registerModal').setAttribute('aria-hidden', 'true');
-		document.body.style.overflow = ''; // Restaura scroll
-		document.getElementById('loginModal').setAttribute('aria-hidden', 'true');
-	});
-});
+// Cambiar entre login y registro desde los enlaces
+window.switchToRegister = function() {
+	const loginModal = document.getElementById('loginModal');
+	const registerModal = document.getElementById('registerModal');
+	if (loginModal && registerModal) {
+		loginModal.setAttribute('aria-hidden', 'true');
+		registerModal.setAttribute('aria-hidden', 'false');
+		document.body.style.overflow = 'hidden';
+	}
+};
 
-// Cerrar al hacer click en el overlay
-document.querySelectorAll('.auth-overlay').forEach(overlay => {
-	overlay.addEventListener('click', () => {
-		document.getElementById('registerModal').setAttribute('aria-hidden', 'true');
-		document.body.style.overflow = '';
-		document.getElementById('loginModal').setAttribute('aria-hidden', 'true');
-	});
-});
+window.switchToLogin = function() {
+	const loginModal = document.getElementById('loginModal');
+	const registerModal = document.getElementById('registerModal');
+	if (loginModal && registerModal) {
+		registerModal.setAttribute('aria-hidden', 'true');
+		loginModal.setAttribute('aria-hidden', 'false');
+		document.body.style.overflow = 'hidden';
+	}
+};
+
+// El cierre de modales se maneja en setupAuthModals()
 
 // Authentication functionality
 function showAuthMessage(message, type = 'success') {
@@ -636,29 +676,107 @@ function checkAuthStatus() {
 
 // Setup Auth Modals
 function setupAuthModals() {
+	console.log('setupAuthModals called');
 	const loginModal = document.getElementById('loginModal');
 	const registerModal = document.getElementById('registerModal');
+	console.log('Modals found - Login:', !!loginModal, 'Register:', !!registerModal);
 
+	// Usar event delegation en el contenedor de botones de autenticación
+	// Esto funciona incluso si los botones se reemplazan dinámicamente
+	const authButtonsContainer = document.querySelector('.auth-buttons');
+	console.log('Auth buttons container found:', !!authButtonsContainer);
+	if (authButtonsContainer) {
+		authButtonsContainer.addEventListener('click', (e) => {
+			console.log('Auth button clicked:', e.target);
+			const target = e.target.closest('button');
+			if (!target) {
+				console.log('No button found in click target');
+				return;
+			}
+			console.log('Button found:', target.id, target.textContent);
+			
+			// Verificar si es el botón de login (por ID, clase, o texto)
+			if (target.id === 'btnLogin' || 
+			    target.textContent.includes('Iniciar Sesión') ||
+			    target.getAttribute('onclick')?.includes('openLoginModal')) {
+				e.preventDefault();
+				e.stopPropagation();
+				console.log('Opening login modal');
+				openLoginModal();
+			}
+			// Verificar si es el botón de registro
+			else if (target.id === 'btnRegister' || 
+			         target.textContent.includes('Registrarse') ||
+			         target.getAttribute('onclick')?.includes('openRegisterModal')) {
+				e.preventDefault();
+				e.stopPropagation();
+				console.log('Opening register modal');
+				openRegisterModal();
+			}
+		});
+	}
+
+	// También conectar directamente los botones originales si existen
+	const btnLogin = document.getElementById('btnLogin');
+	const btnRegister = document.getElementById('btnRegister');
+	console.log('Direct buttons found - Login:', !!btnLogin, 'Register:', !!btnRegister);
+	
+	if (btnLogin) {
+		btnLogin.addEventListener('click', (e) => {
+			e.preventDefault();
+			e.stopPropagation();
+			console.log('Direct login button clicked');
+			openLoginModal();
+		});
+	}
+	
+	if (btnRegister) {
+		btnRegister.addEventListener('click', (e) => {
+			e.preventDefault();
+			e.stopPropagation();
+			console.log('Direct register button clicked');
+			openRegisterModal();
+		});
+	}
+
+	// Conectar formularios
 	if (loginModal) {
 		const closeBtn = loginModal.querySelector('.auth-close');
 		const overlay = loginModal.querySelector('.auth-overlay');
+		const form = loginModal.querySelector('.auth-form');
+		
 		if (closeBtn) closeBtn.addEventListener('click', closeAuthModal);
 		if (overlay) overlay.addEventListener('click', closeAuthModal);
+		if (form) form.addEventListener('submit', handleLogin);
 	}
 
 	if (registerModal) {
 		const closeBtn = registerModal.querySelector('.auth-close');
 		const overlay = registerModal.querySelector('.auth-overlay');
+		const form = registerModal.querySelector('.auth-form');
+		
 		if (closeBtn) closeBtn.addEventListener('click', closeAuthModal);
 		if (overlay) overlay.addEventListener('click', closeAuthModal);
+		if (form) form.addEventListener('submit', handleRegister);
 	}
 
 	// Close on escape key
 	document.addEventListener('keydown', (e) => {
 		if (e.key === 'Escape') {
-			closeAuthModal();
+			const loginModal = document.getElementById('loginModal');
+			const registerModal = document.getElementById('registerModal');
+			if (loginModal && loginModal.getAttribute('aria-hidden') === 'false') {
+				closeAuthModal();
+			}
+			if (registerModal && registerModal.getAttribute('aria-hidden') === 'false') {
+				closeAuthModal();
+			}
 		}
 	});
+	
+	// Verificar estado de autenticación DESPUÉS de configurar los listeners
+	// Esto asegura que los botones reemplazados también funcionen gracias a event delegation
+	checkAuthStatus();
 }
 
 function setupYear() {
@@ -682,11 +800,13 @@ function setupHashNavigation() {
 }
 
 function main() {
+	console.log('main() function called');
 	setupNav();
 	setupCart();
 	setupAuthModals();
 	setupYear();
 	setupHashNavigation();
+	console.log('main() function completed');
 
 	// Check if we're on the shop page
 	if (document.getElementById('productGrid')) {
@@ -694,9 +814,14 @@ function main() {
 		setupCategories();
 	}
 
-	// Check if we're on the home page
-	if (document.getElementById('featuredCarousel')) {
-		renderFeaturedCarousel();
+	// Check if we're on the home page - inicializar carrusel de piezas destacadas
+	const carouselElement = document.querySelector('.piezas-des-carousel');
+	console.log('🔍 Buscando carrusel en la página:', !!carouselElement);
+	if (carouselElement) {
+		console.log('✅ Carrusel encontrado, llamando setupPiezasDestacadasCarousel()');
+		setupPiezasDestacadasCarousel();
+	} else {
+		console.warn('⚠️ Carrusel no encontrado en la página');
 	}
   
   // Setup product modal events
@@ -726,7 +851,39 @@ function setupProductModal() {
     }
   });
 }
-document.addEventListener('DOMContentLoaded', main);
+// Ejecutar main cuando el DOM esté listo
+// Con type="module", el script se ejecuta después de que el DOM esté parseado
+// pero antes de que las imágenes y otros recursos estén cargados
+console.log('📄 Script main.js cargado, readyState:', document.readyState);
+
+// Función para ejecutar main de forma segura
+function executeMain() {
+	try {
+		console.log('🚀 Ejecutando main()...');
+		main();
+	} catch (error) {
+		console.error('❌ Error al ejecutar main():', error);
+	}
+}
+
+if (document.readyState === 'loading') {
+	document.addEventListener('DOMContentLoaded', () => {
+		console.log('✅ DOMContentLoaded fired, calling main()');
+		executeMain();
+	});
+} else {
+	// DOM ya está listo, ejecutar inmediatamente
+	console.log('✅ DOM already ready, calling main() immediately');
+	executeMain();
+}
+
+// También intentar ejecutar después de un pequeño delay por si acaso
+setTimeout(() => {
+	if (document.querySelector('.piezas-des-carousel') && typeof setupPiezasDestacadasCarousel === 'function') {
+		console.log('🔄 Reintentando inicializar carrusel después de delay...');
+		setupPiezasDestacadasCarousel();
+	}
+}, 100);
 
 // Blog Modal Functions
 window.openBlogModal = function (id) {
@@ -744,163 +901,173 @@ window.closeBlogModal = function (id) {
 	}
 };
 
-document.addEventListener('DOMContentLoaded', function() {
-            const carousel = document.querySelector('.piezas-des-carousel');
-            const slidesContainer = document.querySelector('.piezas-des-slides');
-            const slides = document.querySelectorAll('.piezas-des-slide');
-            const prevBtn = document.querySelector('.piezas-des-arrow-prev');
-            const nextBtn = document.querySelector('.piezas-des-arrow-next');
-            const dotsContainer = document.querySelector('.piezas-des-dots');
-            
-            let currentSlide = 0;
-            const totalSlides = slides.length;
-            let autoSlideInterval;
-            
-            // Crear puntos de navegación
-            for (let i = 0; i < totalSlides; i++) {
-                const dot = document.createElement('div');
-                dot.classList.add('piezas-des-dot');
-                if (i === 0) dot.classList.add('active');
-                dot.addEventListener('click', () => goToSlide(i));
-                dotsContainer.appendChild(dot);
-            }
-            
-            const dots = document.querySelectorAll('.piezas-des-dot');
-            
-            // Función para ir a una diapositiva específica
-            function goToSlide(slideIndex) {
-                currentSlide = slideIndex;
-                updateCarousel();
-                resetAutoSlide(); // Reiniciar el autoavance cuando se navega manualmente
-            }
-            
-            // Función para actualizar el carrusel
-            function updateCarousel() {
-                slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
-                
-                // Actualizar puntos activos
-                dots.forEach((dot, index) => {
-                    dot.classList.toggle('active', index === currentSlide);
-                });
-            }
-            
-            // Función para avanzar al siguiente slide
-            function nextSlide() {
-                currentSlide = (currentSlide + 1) % totalSlides;
-                updateCarousel();
-            }
-            
-            // Función para retroceder al slide anterior
-            function prevSlide() {
-                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-                updateCarousel();
-            }
-            
-            // Función para iniciar el autoavance
-            function startAutoSlide() {
-                autoSlideInterval = setInterval(nextSlide, 4000); // Cambia cada 4 segundos
-            }
-            
-            // Función para detener el autoavance
-            function stopAutoSlide() {
-                clearInterval(autoSlideInterval);
-            }
-            
-            // Función para reiniciar el autoavance
-            function resetAutoSlide() {
-                stopAutoSlide();
-                startAutoSlide();
-            }
-            
-            // Eventos para las flechas
-            prevBtn.addEventListener('click', () => {
-                prevSlide();
-                resetAutoSlide();
-            });
-            
-            nextBtn.addEventListener('click', () => {
-                nextSlide();
-                resetAutoSlide();
-            });
-            
-            // Pausar autoavance al pasar el mouse
-            carousel.addEventListener('mouseenter', stopAutoSlide);
-            carousel.addEventListener('mouseleave', startAutoSlide);
-            
-            // Navegación con teclado
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowLeft') {
-                    prevSlide();
-                    resetAutoSlide();
-                } else if (e.key === 'ArrowRight') {
-                    nextSlide();
-                    resetAutoSlide();
-                }
-            });
-            
-            // Iniciar autoavance al cargar la página
-            startAutoSlide();
-        });
-
-		// Obtener elementos
-const loginModal = document.getElementById("loginModal");
-const registerModal = document.getElementById("registerModal");
-const closeButtons = document.querySelectorAll(".auth-close");
-
-// Mostrar modal de inicio de sesión
-function openLogin() {
-  loginModal.classList.add("active");
-  registerModal.classList.remove("active");
+// Función para inicializar el carrusel de piezas destacadas
+function setupPiezasDestacadasCarousel() {
+	console.log('🔧 setupPiezasDestacadasCarousel() llamado');
+	const carousel = document.querySelector('.piezas-des-carousel');
+	console.log('Carrusel encontrado:', !!carousel);
+	if (!carousel) {
+		console.error('❌ Carrusel no encontrado!');
+		return; // Si no existe el carrusel, salir
+	}
+	
+	const slidesContainer = document.querySelector('#featuredCarousel');
+	const slides = document.querySelectorAll('.piezas-des-slide');
+	const prevBtn = document.querySelector('.piezas-des-arrow-prev');
+	const nextBtn = document.querySelector('.piezas-des-arrow-next');
+	const dotsContainer = document.querySelector('.piezas-des-dots');
+	
+	console.log('Elementos encontrados:', {
+		slidesContainer: !!slidesContainer,
+		slides: slides.length,
+		prevBtn: !!prevBtn,
+		nextBtn: !!nextBtn,
+		dotsContainer: !!dotsContainer
+	});
+	
+	if (!slidesContainer || !slides.length || !prevBtn || !nextBtn || !dotsContainer) {
+		console.error('❌ Elementos del carrusel no encontrados:', {
+			slidesContainer: !!slidesContainer,
+			slides: slides.length,
+			prevBtn: !!prevBtn,
+			nextBtn: !!nextBtn,
+			dotsContainer: !!dotsContainer
+		});
+		return;
+	}
+	
+	console.log('✅ Todos los elementos encontrados, inicializando carrusel...');
+	
+	let currentSlide = 0;
+	const totalSlides = slides.length;
+	let autoSlideInterval;
+	
+	// Crear puntos de navegación
+	dotsContainer.innerHTML = ''; // Limpiar puntos existentes
+	for (let i = 0; i < totalSlides; i++) {
+		const dot = document.createElement('div');
+		dot.classList.add('piezas-des-dot');
+		if (i === 0) dot.classList.add('active');
+		dot.addEventListener('click', () => goToSlide(i));
+		dotsContainer.appendChild(dot);
+	}
+	
+	const dots = document.querySelectorAll('.piezas-des-dot');
+	
+	// Función para ir a una diapositiva específica
+	function goToSlide(slideIndex) {
+		currentSlide = slideIndex;
+		updateCarousel();
+		resetAutoSlide(); // Reiniciar el autoavance cuando se navega manualmente
+	}
+	
+	// Función para actualizar el carrusel
+	function updateCarousel() {
+		slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+		
+		// Actualizar puntos activos
+		dots.forEach((dot, index) => {
+			dot.classList.toggle('active', index === currentSlide);
+		});
+	}
+	
+	// Función para avanzar al siguiente slide
+	function nextSlide() {
+		currentSlide = (currentSlide + 1) % totalSlides;
+		updateCarousel();
+	}
+	
+	// Función para retroceder al slide anterior
+	function prevSlide() {
+		currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+		updateCarousel();
+	}
+	
+	// Función para iniciar el autoavance
+	function startAutoSlide() {
+		if (autoSlideInterval) clearInterval(autoSlideInterval);
+		autoSlideInterval = setInterval(nextSlide, 4000); // Cambia cada 4 segundos
+	}
+	
+	// Función para detener el autoavance
+	function stopAutoSlide() {
+		if (autoSlideInterval) {
+			clearInterval(autoSlideInterval);
+			autoSlideInterval = null;
+		}
+	}
+	
+	// Función para reiniciar el autoavance
+	function resetAutoSlide() {
+		stopAutoSlide();
+		startAutoSlide();
+	}
+	
+	// Eventos para las flechas
+	prevBtn.addEventListener('click', () => {
+		prevSlide();
+		resetAutoSlide();
+	});
+	
+	nextBtn.addEventListener('click', () => {
+		nextSlide();
+		resetAutoSlide();
+	});
+	
+	// Pausar autoavance al pasar el mouse
+	carousel.addEventListener('mouseenter', stopAutoSlide);
+	carousel.addEventListener('mouseleave', startAutoSlide);
+	
+	// Navegación con teclado (solo cuando el carrusel está visible)
+	carousel.addEventListener('keydown', (e) => {
+		if (e.key === 'ArrowLeft') {
+			e.preventDefault();
+			prevSlide();
+			resetAutoSlide();
+		} else if (e.key === 'ArrowRight') {
+			e.preventDefault();
+			nextSlide();
+			resetAutoSlide();
+		}
+	});
+	
+	// Inicializar posición
+	updateCarousel();
+	
+	// Iniciar autoavance al cargar la página
+	startAutoSlide();
+	
+	console.log('✅ Carrusel inicializado correctamente con', totalSlides, 'slides');
 }
 
-// Mostrar modal de registro
-function openRegister() {
-  registerModal.classList.add("active");
-  loginModal.classList.remove("active");
-}
-
-// Cerrar todos los modales
-function closeModals() {
-  loginModal.classList.remove("active");
-  registerModal.classList.remove("active");
-}
-
-// Cambiar entre login y registro desde los enlaces
-function switchToRegister() {
-  loginModal.classList.remove("active");
-  registerModal.classList.add("active");
-}
-
-function switchToLogin() {
-  registerModal.classList.remove("active");
-  loginModal.classList.add("active");
-}
-
-// Cerrar al presionar overlay o botón cerrar
-closeButtons.forEach(btn => {
-  btn.addEventListener("click", closeModals);
-});
-
-document.querySelectorAll(".auth-overlay").forEach(overlay => {
-  overlay.addEventListener("click", closeModals);
-});
-
-// Ejemplo: cómo puedes vincularlo con tus botones del frontend
-// (asegúrate que existan estos botones en tu HTML)
-document.getElementById("btnLogin")?.addEventListener("click", openLogin);
-document.getElementById("btnRegister")?.addEventListener("click", openRegister);
+// Cambiar entre login y registro desde los enlaces (ya definido arriba)
 
 // --- Login con Google ---
 window.onload = function() {
-  const googleButton = document.getElementById("googleLogin");
+  const googleLoginButton = document.getElementById("googleLoginModal");
+  const googleRegisterButton = document.getElementById("googleRegisterModal");
 
-  if (googleButton) {
-    googleButton.addEventListener("click", () => {
-      google.accounts.id.initialize({
-        client_id: "TU_CLIENT_ID_DE_GOOGLE.apps.googleusercontent.com",
-        callback: handleCredentialResponse
-      });
-      google.accounts.id.prompt(); // muestra la ventana emergente
+  if (googleLoginButton) {
+    googleLoginButton.addEventListener("click", () => {
+      if (typeof google !== 'undefined' && google.accounts) {
+        google.accounts.id.initialize({
+          client_id: "TU_CLIENT_ID_DE_GOOGLE.apps.googleusercontent.com",
+          callback: handleCredentialResponse
+        });
+        google.accounts.id.prompt(); // muestra la ventana emergente
+      }
+    });
+  }
+  
+  if (googleRegisterButton) {
+    googleRegisterButton.addEventListener("click", () => {
+      if (typeof google !== 'undefined' && google.accounts) {
+        google.accounts.id.initialize({
+          client_id: "TU_CLIENT_ID_DE_GOOGLE.apps.googleusercontent.com",
+          callback: handleCredentialResponse
+        });
+        google.accounts.id.prompt(); // muestra la ventana emergente
+      }
     });
   }
 };
@@ -926,9 +1093,21 @@ function parseJwt(token) {
   );
   return JSON.parse(jsonPayload);
 }
-document.getElementById("appleLogin")?.addEventListener("click", () => {
-  alert("Inicio con Apple disponible próximamente 🍎");
-});
+// Botones de Apple
+const appleLoginButton = document.getElementById("appleLoginModal");
+const appleRegisterButton = document.getElementById("appleRegisterModal");
+
+if (appleLoginButton) {
+  appleLoginButton.addEventListener("click", () => {
+    alert("Inicio con Apple disponible próximamente 🍎");
+  });
+}
+
+if (appleRegisterButton) {
+  appleRegisterButton.addEventListener("click", () => {
+    alert("Inicio con Apple disponible próximamente 🍎");
+  });
+}
 
 
 function openProductDetail(productId) {
