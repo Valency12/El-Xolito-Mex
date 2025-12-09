@@ -1165,15 +1165,6 @@ function openProductDetail(productId) {
           </div>
         </div>
 
-        <div class="product-actions">
-          <button class="btn btn-primary btn-full" onclick="addToCartFromDetail('${product.id}')">
-            Añadir al carrito
-          </button>
-          <button class="btn btn-outline btn-full" onclick="addToCartAndCheckout('${product.id}')">
-            Comprar ahora
-          </button>
-        </div>
-
         <div class="product-features">
           <div class="feature">
             <span class="feature-icon">🚚</span>
@@ -1187,6 +1178,15 @@ function openProductDetail(productId) {
             <span class="feature-icon">↩️</span>
             <span>Devoluciones en 30 días</span>
           </div>
+        </div>
+
+        <div class="product-actions">
+          <button class="btn btn-primary btn-full" onclick="addToCartFromDetail('${product.id}')">
+            Añadir al carrito
+          </button>
+          <button class="btn btn-outline btn-full" onclick="addToCartAndCheckout('${product.id}')">
+            Comprar ahora
+          </button>
         </div>
       </div>
     </div>
