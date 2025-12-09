@@ -42,7 +42,7 @@
 
         </div>
         <button class="cart-toggle" aria-label="Ver carrito" data-count="0">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-cart2"
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart2"
             viewBox="0 0 16 16">
             <path
               d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5M3.14 5l1.25 5h8.22l1.25-5zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0" />
@@ -62,7 +62,7 @@
             todos los días.</p>
           <div class="hero-cta">
             <a href="tienda.html" class="btn btn-hero">Ver tienda completa</a>
-            <a href="#destacados" class="btn btn-outline">Ver destacados</a>
+            <a href="#destacados" class="btn btn-outline" onclick="event.preventDefault(); document.querySelector('#destacados').scrollIntoView({ behavior: 'smooth' });">Ver destacados</a>
           </div>
         </div>
         <div class="hero-media" aria-hidden="true">
@@ -114,7 +114,7 @@
     </section>
 
 
-    <section class="piezas-destacadas-container">
+    <section id="destacados" class="piezas-destacadas-container">
       <h2 class="section-title piezas-destacadas">Piezas Destacadas</h2>
 
       <div class="piezas-des-carousel">
@@ -130,7 +130,7 @@
                 <h3 class="piezas-des-name">Pulsera Vintage Alhambra, 5 motivos</h3>
                 <p class="piezas-des-materials">Oro blanco, Diamante, Ónice</p>
                 <p class="piezas-des-price">MX$ 380.000</p>
-                <button class="btn piezas-des-button"><strong>Ver en la tienda</strong></button>
+                <button class="btn piezas-des-button" onclick="window.location.href='producto.html?id=D5'"><strong>Ver en la tienda</strong></button>
               </div>
             </div>
             <!-- Diapositiva 2 -->
@@ -142,7 +142,7 @@
                 <h3 class="piezas-des-name">Collar Perlas Naturales</h3>
                 <p class="piezas-des-materials">Oro amarillo, Perlas, Diamantes</p>
                 <p class="piezas-des-price">MX$ 520.000</p>
-                <button class="piezas-des-button">Ver en la tienda</button>
+                <button class="piezas-des-button" onclick="window.location.href='producto.html?id=A1'">Ver en la tienda</button>
               </div>
             </div>
             <!-- Diapositiva 3 -->
@@ -154,7 +154,7 @@
                 <h3 class="piezas-des-name">Anillo Solitario Diamante</h3>
                 <p class="piezas-des-materials">Platino, Diamante 2ct</p>
                 <p class="piezas-des-price">MX$ 750.000</p>
-                <button class="piezas-des-button">Ver en la tienda</button>
+                <button class="piezas-des-button" onclick="window.location.href='producto.html?id=A2'">Ver en la tienda</button>
               </div>
             </div>
             <!-- Diapositiva 4 -->
@@ -166,7 +166,7 @@
                 <h3 class="piezas-des-name">Pendientes Esmeralda Colombia</h3>
                 <p class="piezas-des-materials">Oro blanco, Esmeraldas, Diamantes</p>
                 <p class="piezas-des-price">MX$ 680.000</p>
-                <button class="piezas-des-button">Ver en la tienda</button>
+                <button class="piezas-des-button" onclick="window.location.href='producto.html?id=E2'">Ver en la tienda</button>
               </div>
             </div>
           </div>
