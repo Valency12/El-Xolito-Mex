@@ -2789,9 +2789,9 @@ body {
 .product-price {
   margin: 0;
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 500;
   text-align: left;
-  color: #000;
+  color: #fff;
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -3050,13 +3050,13 @@ body {
 .qty-controls button {
   width: 32px;
   border: none;
-  background: transparent;
+  background: #111;
   cursor: pointer;
   font-size: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #000;
+  color: #fff;
   transition: background 0.2s;
   font-weight: 500;
   border-radius: 4px;
@@ -3070,11 +3070,11 @@ body {
   width: 40px;
   height: 32px;
   border: none;
-  background: transparent;
+  background: #111;
   text-align: center;
   font-size: 14px;
   font-weight: 500;
-  color: #000;
+  color: #fff;
   border-radius: 4px; 
   padding: 0;
   pointer-events: none; /* que se vea como texto, controlado solo por los botones */
