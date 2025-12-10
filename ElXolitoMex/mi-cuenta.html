@@ -4,8 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Producto – El Xolito Mex</title>
-  <meta name="description" content="Descubre nuestra joyería mexicana minimalista." />
+  <title>Mi Cuenta – El Xolito Mex</title>
+  <meta name="description" content="Gestiona tu cuenta y pedidos en El Xolito Mex" />
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,12 +56,37 @@
   </header>
 
   <main>
-    <!-- Contenedor del producto -->
-    <section class="product-page" id="productPage">
+    <section class="account-section">
       <div class="container">
-        <!-- Se mostrará aquí el contenido del producto -->
-        <div id="productContent" class="product-content-wrapper">
-          <!-- El contenido se carga dinámicamente con JavaScript -->
+        <div class="account-header">
+          <button class="btn-logout" id="btnLogoutAccount" onclick="handleLogout()">CERRAR SESIÓN</button>
+          <h1 class="account-title">MI CUENTA</h1>
+          <div class="account-welcome" id="accountWelcome">
+            <p>Hola! es bueno verte <span id="userNameDisplay"></span>!</p>
+          </div>
+        </div>
+
+        <div class="account-content">
+          <div class="account-left">
+            <h2 class="account-section-title">MIS ORDENES</h2>
+            <div class="account-divider"></div>
+            <div class="orders-empty" id="ordersEmpty">
+              <p>No haz hecho ninguna orden todavia</p>
+            </div>
+            <div class="orders-list" id="ordersList" style="display: none;">
+              <!-- Las órdenes se mostrarán aquí -->
+            </div>
+          </div>
+
+          <div class="account-right">
+            <h2 class="account-section-title">DIRECCION PRINCIPAL</h2>
+            <div class="account-divider"></div>
+            <div class="address-info" id="addressInfo">
+              <p id="addressName"></p>
+              <p id="addressCountry">México</p>
+            </div>
+            <button class="btn-edit-address" id="btnEditAddress">EDITAR DIRECCION</button>
+          </div>
         </div>
       </div>
     </section>
@@ -197,6 +223,13 @@
           <div class="form-group">
             <label for="registerPassword">Contraseña</label>
             <input type="password" id="registerPassword" required>
+            <small style="display: block; margin-top: 0.5rem; color: #666; font-size: 0.85rem;">
+              Mínimo 8 caracteres, una mayúscula, una minúscula y un número
+            </small>
+          </div>
+          <div class="form-group">
+            <label for="registerTelefono">Teléfono (opcional)</label>
+            <input type="tel" id="registerTelefono">
           </div>
           <div class="separator"><span>or</span></div>
           <div class="social-login">
@@ -207,6 +240,7 @@
               <img src="https://www.svgrepo.com/show/452196/apple-black.svg" alt="Apple"> Iniciar con Apple
             </button>
           </div>
+
           <div class="form-inicio">
             <button type="submit" class="btn btn-primary">Crear Cuenta</button>
           </div>
@@ -242,12 +276,8 @@
 
   <script src="services/authService.js"></script>
   <script type="module" src="main.js"></script>
+  <script src="mi-cuenta.js"></script>
 </body>
 
 </html>
-
-
-
-
-
 

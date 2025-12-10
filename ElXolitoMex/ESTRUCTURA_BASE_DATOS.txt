@@ -1,0 +1,551 @@
+================================================================================
+ESTRUCTURA DE BASE DE DATOS - EL XOLITO MEX
+================================================================================
+
+Este documento describe todas las tablas necesarias para la tienda de joyería,
+sus atributos, tipos de datos y relaciones entre ellas.
+
+================================================================================
+TABLAS PRINCIPALES
+================================================================================
+
+1. USUARIOS (users)
+2. PRODUCTOS (products)
+3. CATEGORÍAS (categories)
+4. IMÁGENES_PRODUCTOS (product_images)
+5. OFERTAS (offers)
+6. REELS_INSTAGRAM (instagram_reels)
+7. TESTIMONIOS (testimonials)
+8. PEDIDOS (orders)
+9. DETALLES_PEDIDO (order_items)
+10. CARRITOS (carts) - Opcional (puede ser temporal)
+11. DIRECCIONES (addresses)
+12. MÉTODOS_PAGO (payment_methods) - Opcional
+
+================================================================================
+DETALLE DE TABLAS Y ATRIBUTOS
+================================================================================
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 1. USUARIOS (users)                                                         │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ Propósito: Almacenar información de usuarios (clientes y administradores)│
+│                                                                             │
+│ Atributos:                                                                  │
+│   - id                    INTEGER PRIMARY KEY AUTOINCREMENT              │
+│   - email                 VARCHAR(255) UNIQUE NOT NULL                      │
+│   - password_hash         VARCHAR(255) NOT NULL                            │
+│   - nombre_completo       VARCHAR(255) NOT NULL                            │
+│   - telefono              VARCHAR(20)                                       │
+│   - fecha_nacimiento      DATE                                             │
+│   - rol                   VARCHAR(20) DEFAULT 'cliente'                    │
+│                            (valores: 'cliente', 'admin', 'super_admin')    │
+│   - activo                BOOLEAN DEFAULT 1                                │
+│   - email_verificado      BOOLEAN DEFAULT 0                               │
+│   - token_verificacion    VARCHAR(255)                                      │
+│   - fecha_registro        TIMESTAMP DEFAULT CURRENT_TIMESTAMP             │
+│   - ultima_sesion         TIMESTAMP                                        │
+│   - created_at            TIMESTAMP DEFAULT CURRENT_TIMESTAMP             │
+│   - updated_at             TIMESTAMP DEFAULT CURRENT_TIMESTAMP             │
+│                                                                             │
+│ Índices:                                                                    │
+│   - PRIMARY KEY (id)                                                        │
+│   - UNIQUE INDEX (email)                                                    │
+│   - INDEX (rol)                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 2. CATEGORÍAS (categories)                                                 │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ Propósito: Categorías de productos (anillos, pulseras, collares, etc.)    │
+│                                                                             │
+│ Atributos:                                                                  │
+│   - id                    INTEGER PRIMARY KEY AUTOINCREMENT              │
+│   - nombre                VARCHAR(100) NOT NULL                            │
+│                            (ej: 'anillos', 'pulseras', 'collares', etc.)   │
+│   - slug                  VARCHAR(100) UNIQUE NOT NULL                     │
+│                            (URL-friendly: 'anillos', 'pulseras')           │
+│   - descripcion           TEXT                                             │
+│   - imagen_icono          VARCHAR(255)                                     │
+│                            (ruta a imagen de categoría)                    │
+│   - orden                 INTEGER DEFAULT 0                                │
+│                            (para ordenar categorías en el menú)            │
+│   - activa                BOOLEAN DEFAULT 1                                │
+│   - created_at            TIMESTAMP DEFAULT CURRENT_TIMESTAMP             │
+│   - updated_at            TIMESTAMP DEFAULT CURRENT_TIMESTAMP             │
+│                                                                             │
+│ Índices:                                                                    │
+│   - PRIMARY KEY (id)                                                        │
+│   - UNIQUE INDEX (slug)                                                     │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 3. PRODUCTOS (products)                                                     │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ Propósito: Información de cada producto de joyería                          │
+│                                                                             │
+│ Atributos:                                                                  │
+│   - id                    VARCHAR(10) PRIMARY KEY                          │
+│                            (ej: 'A1', 'D2', 'E3')                          │
+│   - categoria_id          INTEGER NOT NULL                                 │
+│                            FOREIGN KEY → categories(id)                     │
+│   - nombre                VARCHAR(255) NOT NULL                            │
+│   - slug                  VARCHAR(255) UNIQUE NOT NULL                     │
+│                            (URL-friendly: 'anillo-sello')                   │
+│   - descripcion_corta     TEXT                                             │
+│   - descripcion_larga     TEXT                                             │
+│   - precio                DECIMAL(10, 2) NOT NULL                           │
+│                            (precio en pesos mexicanos)                      │
+│   - precio_anterior       DECIMAL(10, 2)                                   │
+│                            (precio antes de descuento, si aplica)          │
+│   - material              VARCHAR(100)                                      │
+│                            (ej: 'Plata .925', 'Oro laminado')              │
+│   - color                 VARCHAR(50)                                      │
+│                            (ej: 'Plata', 'Dorado', 'Rosa')                 │
+│   - stock                 INTEGER DEFAULT 0                               │
+│                            (cantidad disponible)                           │
+│   - stock_minimo          INTEGER DEFAULT 5                               │
+│                            (alerta cuando llegue a este número)            │
+│   - destacado             BOOLEAN DEFAULT 0                                 │
+│                            (aparece en sección "Piezas Destacadas")        │
+│   - activo                BOOLEAN DEFAULT 1                               │
+│   - peso_gramos           DECIMAL(8, 2)                                    │
+│                            (peso del producto en gramos)                    │
+│   - dimensiones           VARCHAR(100)                                      │
+│                            (ej: '2.5cm x 1.8cm')                           │
+│   - sku                   VARCHAR(50) UNIQUE                               │
+│                            (código único del producto)                      │
+│   - tags                  VARCHAR(255)                                     │
+│                            (tags separados por comas: 'vintage,minimalista')│
+│   - created_at            TIMESTAMP DEFAULT CURRENT_TIMESTAMP             │
+│   - updated_at            TIMESTAMP DEFAULT CURRENT_TIMESTAMP             │
+│                                                                             │
+│ Índices:                                                                    │
+│   - PRIMARY KEY (id)                                                        │
+│   - FOREIGN KEY (categoria_id) REFERENCES categories(id)                    │
+│   - INDEX (categoria_id)                                                    │
+│   - INDEX (destacado)                                                       │
+│   - INDEX (activo)                                                          │
+│   - INDEX (slug)                                                            │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 4. IMÁGENES_PRODUCTOS (product_images)                                      │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ Propósito: Múltiples imágenes por producto                                 │
+│                                                                             │
+│ Atributos:                                                                  │
+│   - id                    INTEGER PRIMARY KEY AUTOINCREMENT              │
+│   - producto_id            VARCHAR(10) NOT NULL                             │
+│                            FOREIGN KEY → products(id)                       │
+│   - ruta_imagen           VARCHAR(255) NOT NULL                            │
+│                            (ruta relativa: 'assets/Anillos/anillo.png')    │
+│   - es_principal          BOOLEAN DEFAULT 0                               │
+│                            (solo una imagen principal por producto)        │
+│   - orden                 INTEGER DEFAULT 0                                │
+│                            (orden de visualización)                        │
+│   - alt_text              VARCHAR(255)                                     │
+│                            (texto alternativo para accesibilidad)          │
+│   - created_at            TIMESTAMP DEFAULT CURRENT_TIMESTAMP             │
+│                                                                             │
+│ Índices:                                                                    │
+│   - PRIMARY KEY (id)                                                        │
+│   - FOREIGN KEY (producto_id) REFERENCES products(id) ON DELETE CASCADE      │
+│   - INDEX (producto_id)                                                     │
+│   - INDEX (es_principal)                                                    │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 5. OFERTAS (offers)                                                         │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ Propósito: Ofertas especiales y descuentos                                 │
+│                                                                             │
+│ Atributos:                                                                  │
+│   - id                    INTEGER PRIMARY KEY AUTOINCREMENT              │
+│   - titulo                VARCHAR(255) NOT NULL                           │
+│                            (ej: 'Anillos de plata')                        │
+│   - descripcion            TEXT                                             │
+│   - tipo_descuento         VARCHAR(20) NOT NULL                            │
+│                            (valores: 'porcentaje', 'fijo', 'categoria')    │
+│   - valor_descuento        DECIMAL(10, 2) NOT NULL                         │
+│                            (si tipo='porcentaje': 20 = 20%,                │
+│                             si tipo='fijo': 100 = $100 pesos)              │
+│   - categoria_id           INTEGER                                          │
+│                            FOREIGN KEY → categories(id)                     │
+│                            (NULL si es oferta general)                      │
+│   - producto_id            VARCHAR(10)                                     │
+│                            FOREIGN KEY → products(id)                      │
+│                            (NULL si es oferta por categoría)                │
+│   - imagen_oferta          VARCHAR(255)                                    │
+│                            (imagen destacada de la oferta)                 │
+│   - precio_anterior        DECIMAL(10, 2)                                  │
+│                            (precio antes del descuento)                    │
+│   - precio_nuevo           DECIMAL(10, 2)                                  │
+│                            (precio con descuento)                          │
+│   - fecha_inicio           DATE NOT NULL                                   │
+│   - fecha_fin              DATE                                            │
+│                            (NULL = oferta sin fecha de expiración)         │
+│   - activa                 BOOLEAN DEFAULT 1                               │
+│   - orden                  INTEGER DEFAULT 0                               │
+│                            (orden de visualización)                        │
+│   - created_at             TIMESTAMP DEFAULT CURRENT_TIMESTAMP            │
+│   - updated_at             TIMESTAMP DEFAULT CURRENT_TIMESTAMP             │
+│                                                                             │
+│ Índices:                                                                    │
+│   - PRIMARY KEY (id)                                                        │
+│   - FOREIGN KEY (categoria_id) REFERENCES categories(id)                    │
+│   - FOREIGN KEY (producto_id) REFERENCES products(id)                       │
+│   - INDEX (activa)                                                          │
+│   - INDEX (fecha_inicio, fecha_fin)                                        │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 6. REELS_INSTAGRAM (instagram_reels)                                        │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ Propósito: Videos de reels de Instagram para mostrar en la página          │
+│                                                                             │
+│ Atributos:                                                                  │
+│   - id                    INTEGER PRIMARY KEY AUTOINCREMENT              │
+│   - titulo                VARCHAR(255)                                     │
+│                            (título opcional del reel)                      │
+│   - url_instagram          VARCHAR(500) NOT NULL                           │
+│                            (URL completa del reel en Instagram)            │
+│   - url_video              VARCHAR(500)                                     │
+│                            (ruta local del video descargado)               │
+│                            (ej: 'assets/Reels/reel1.mp4')                  │
+│   - miniatura              VARCHAR(500)                                     │
+│                            (imagen miniatura del reel)                      │
+│   - orden                  INTEGER DEFAULT 0                               │
+│                            (orden de visualización en la galería)           │
+│   - activo                 BOOLEAN DEFAULT 1                               │
+│   - fecha_publicacion      DATE                                            │
+│                            (fecha de publicación en Instagram)             │
+│   - created_at            TIMESTAMP DEFAULT CURRENT_TIMESTAMP             │
+│   - updated_at            TIMESTAMP DEFAULT CURRENT_TIMESTAMP               │
+│                                                                             │
+│ Índices:                                                                    │
+│   - PRIMARY KEY (id)                                                        │
+│   - INDEX (activo)                                                          │
+│   - INDEX (orden)                                                           │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 7. TESTIMONIOS (testimonials)                                               │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ Propósito: Testimonios de clientes                                         │
+│                                                                             │
+│ Atributos:                                                                  │
+│   - id                    INTEGER PRIMARY KEY AUTOINCREMENT              │
+│   - nombre_cliente         VARCHAR(255) NOT NULL                           │
+│   - ciudad                 VARCHAR(100)                                    │
+│   - testimonio             TEXT NOT NULL                                    │
+│   - calificacion           INTEGER                                          │
+│                            (1-5 estrellas, NULL si no aplica)              │
+│   - foto_cliente           VARCHAR(255)                                    │
+│                            (ruta a foto del cliente, opcional)             │
+│   - inicial_nombre         VARCHAR(1)                                       │
+│                            (letra inicial para avatar, ej: 'M')            │
+│   - producto_id            VARCHAR(10)                                      │
+│                            FOREIGN KEY → products(id)                     │
+│                            (NULL si es testimonio general)                  │
+│   - aprobado               BOOLEAN DEFAULT 0                               │
+│                            (solo mostrar testimonios aprobados)             │
+│   - orden                  INTEGER DEFAULT 0                                │
+│   - created_at             TIMESTAMP DEFAULT CURRENT_TIMESTAMP             │
+│   - updated_at             TIMESTAMP DEFAULT CURRENT_TIMESTAMP               │
+│                                                                             │
+│ Índices:                                                                    │
+│   - PRIMARY KEY (id)                                                        │
+│   - FOREIGN KEY (producto_id) REFERENCES products(id)                      │
+│   - INDEX (aprobado)                                                        │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 8. DIRECCIONES (addresses)                                                  │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ Propósito: Direcciones de envío de los clientes                           │
+│                                                                             │
+│ Atributos:                                                                  │
+│   - id                    INTEGER PRIMARY KEY AUTOINCREMENT              │
+│   - usuario_id            INTEGER NOT NULL                                 │
+│                            FOREIGN KEY → users(id)                          │
+│   - tipo                  VARCHAR(20) DEFAULT 'envio'                      │
+│                            (valores: 'envio', 'facturacion')                │
+│   - nombre_completo        VARCHAR(255) NOT NULL                            │
+│   - calle                 VARCHAR(255) NOT NULL                            │
+│   - numero_exterior        VARCHAR(20) NOT NULL                             │
+│   - numero_interior        VARCHAR(20)                                      │
+│   - colonia                VARCHAR(255) NOT NULL                            │
+│   - ciudad                 VARCHAR(100) NOT NULL                            │
+│   - estado                VARCHAR(100) NOT NULL                             │
+│   - codigo_postal          VARCHAR(10) NOT NULL                             │
+│   - pais                  VARCHAR(100) DEFAULT 'México'                      │
+│   - telefono              VARCHAR(20)                                       │
+│   - referencias            TEXT                                             │
+│                            (referencias de ubicación)                       │
+│   - es_principal           BOOLEAN DEFAULT 0                               │
+│   - created_at            TIMESTAMP DEFAULT CURRENT_TIMESTAMP              │
+│   - updated_at            TIMESTAMP DEFAULT CURRENT_TIMESTAMP              │
+│                                                                             │
+│ Índices:                                                                    │
+│   - PRIMARY KEY (id)                                                        │
+│   - FOREIGN KEY (usuario_id) REFERENCES users(id) ON DELETE CASCADE         │
+│   - INDEX (usuario_id)                                                      │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 9. PEDIDOS (orders)                                                         │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ Propósito: Órdenes de compra realizadas por los clientes                  │
+│                                                                             │
+│ Atributos:                                                                  │
+│   - id                    INTEGER PRIMARY KEY AUTOINCREMENT              │
+│   - numero_pedido         VARCHAR(20) UNIQUE NOT NULL                     │
+│                            (ej: 'PED-2024-001234')                         │
+│   - usuario_id            INTEGER                                          │
+│                            FOREIGN KEY → users(id)                         │
+│                            (NULL si es compra como invitado)                │
+│   - email_cliente         VARCHAR(255) NOT NULL                           │
+│                            (email del cliente, incluso si no está registrado)│
+│   - nombre_cliente        VARCHAR(255) NOT NULL                            │
+│   - telefono_cliente      VARCHAR(20)                                      │
+│   - direccion_envio_id     INTEGER                                          │
+│                            FOREIGN KEY → addresses(id)                     │
+│   - direccion_facturacion_id INTEGER                                       │
+│                            FOREIGN KEY → addresses(id)                     │
+│   - subtotal              DECIMAL(10, 2) NOT NULL                           │
+│                            (suma de productos sin descuentos)                │
+│   - descuento             DECIMAL(10, 2) DEFAULT 0                          │
+│                            (descuento total aplicado)                       │
+│   - envio                 DECIMAL(10, 2) DEFAULT 0                         │
+│                            (costo de envío)                                 │
+│   - total                 DECIMAL(10, 2) NOT NULL                          │
+│                            (subtotal - descuento + envío)                  │
+│   - metodo_pago           VARCHAR(50)                                      │
+│                            (ej: 'tarjeta', 'transferencia', 'efectivo')     │
+│   - estado                VARCHAR(50) DEFAULT 'pendiente'                 │
+│                            (valores: 'pendiente', 'confirmado',             │
+│                             'en_preparacion', 'enviado', 'entregado',        │
+│                             'cancelado')                                   │
+│   - fecha_envio           DATE                                             │
+│   - numero_seguimiento    VARCHAR(100)                                      │
+│                            (número de guía de envío)                        │
+│   - notas                 TEXT                                             │
+│                            (notas del cliente o administrador)             │
+│   - created_at            TIMESTAMP DEFAULT CURRENT_TIMESTAMP             │
+│   - updated_at            TIMESTAMP DEFAULT CURRENT_TIMESTAMP             │
+│                                                                             │
+│ Índices:                                                                    │
+│   - PRIMARY KEY (id)                                                        │
+│   - UNIQUE INDEX (numero_pedido)                                           │
+│   - FOREIGN KEY (usuario_id) REFERENCES users(id)                            │
+│   - FOREIGN KEY (direccion_envio_id) REFERENCES addresses(id)               │
+│   - FOREIGN KEY (direccion_facturacion_id) REFERENCES addresses(id)          │
+│   - INDEX (usuario_id)                                                      │
+│   - INDEX (estado)                                                          │
+│   - INDEX (created_at)                                                      │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 10. DETALLES_PEDIDO (order_items)                                          │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ Propósito: Productos individuales dentro de cada pedido                     │
+│                                                                             │
+│ Atributos:                                                                  │
+│   - id                    INTEGER PRIMARY KEY AUTOINCREMENT              │
+│   - pedido_id             INTEGER NOT NULL                                 │
+│                            FOREIGN KEY → orders(id) ON DELETE CASCADE       │
+│   - producto_id            VARCHAR(10) NOT NULL                             │
+│                            FOREIGN KEY → products(id)                       │
+│   - nombre_producto       VARCHAR(255) NOT NULL                            │
+│                            (snapshot del nombre al momento de la compra)    │
+│   - precio_unitario       DECIMAL(10, 2) NOT NULL                          │
+│                            (precio al momento de la compra)                  │
+│   - cantidad              INTEGER NOT NULL                                 │
+│   - subtotal              DECIMAL(10, 2) NOT NULL                          │
+│                            (precio_unitario * cantidad)                     │
+│   - created_at            TIMESTAMP DEFAULT CURRENT_TIMESTAMP              │
+│                                                                             │
+│ Índices:                                                                    │
+│   - PRIMARY KEY (id)                                                        │
+│   - FOREIGN KEY (pedido_id) REFERENCES orders(id) ON DELETE CASCADE         │
+│   - FOREIGN KEY (producto_id) REFERENCES products(id)                       │
+│   - INDEX (pedido_id)                                                       │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 11. CARRITOS (carts) - OPCIONAL                                            │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ Propósito: Guardar carritos de usuarios registrados (para recuperar más    │
+│            tarde)                                                           │
+│                                                                             │
+│ Atributos:                                                                  │
+│   - id                    INTEGER PRIMARY KEY AUTOINCREMENT              │
+│   - usuario_id            INTEGER NOT NULL                                │
+│                            FOREIGN KEY → users(id) ON DELETE CASCADE        │
+│   - datos_carrito          TEXT NOT NULL                                   │
+│                            (JSON con los items del carrito)                  │
+│   - updated_at            TIMESTAMP DEFAULT CURRENT_TIMESTAMP              │
+│                                                                             │
+│ Índices:                                                                    │
+│   - PRIMARY KEY (id)                                                        │
+│   - FOREIGN KEY (usuario_id) REFERENCES users(id) ON DELETE CASCADE        │
+│   - UNIQUE INDEX (usuario_id)                                               │
+│                                                                             │
+│ NOTA: Esta tabla es opcional. Puedes mantener el carrito solo en           │
+│       localStorage del navegador y solo guardarlo aquí cuando el usuario   │
+│       esté registrado y quiera guardar su carrito.                         │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+================================================================================
+RELACIONES ENTRE TABLAS
+================================================================================
+
+1. CATEGORÍAS → PRODUCTOS
+   - Relación: 1 a Muchos (Una categoría tiene muchos productos)
+   - Foreign Key: products.categoria_id → categories.id
+
+2. PRODUCTOS → IMÁGENES_PRODUCTOS
+   - Relación: 1 a Muchos (Un producto tiene muchas imágenes)
+   - Foreign Key: product_images.producto_id → products.id
+   - ON DELETE: CASCADE (si se elimina un producto, se eliminan sus imágenes)
+
+3. CATEGORÍAS → OFERTAS
+   - Relación: 1 a Muchos (Una categoría puede tener muchas ofertas)
+   - Foreign Key: offers.categoria_id → categories.id
+   - Opcional: Una oferta puede ser por categoría O por producto específico
+
+4. PRODUCTOS → OFERTAS
+   - Relación: 1 a Muchos (Un producto puede tener muchas ofertas)
+   - Foreign Key: offers.producto_id → products.id
+   - Opcional: Una oferta puede ser por producto específico O por categoría
+
+5. PRODUCTOS → TESTIMONIOS
+   - Relación: 1 a Muchos (Un producto puede tener muchos testimonios)
+   - Foreign Key: testimonials.producto_id → products.id
+   - Opcional: Un testimonio puede ser general (sin producto específico)
+
+6. USUARIOS → DIRECCIONES
+   - Relación: 1 a Muchos (Un usuario puede tener muchas direcciones)
+   - Foreign Key: addresses.usuario_id → users.id
+   - ON DELETE: CASCADE (si se elimina un usuario, se eliminan sus direcciones)
+
+7. USUARIOS → PEDIDOS
+   - Relación: 1 a Muchos (Un usuario puede tener muchos pedidos)
+   - Foreign Key: orders.usuario_id → users.id
+   - Opcional: Un pedido puede ser de un usuario no registrado (usuario_id = NULL)
+
+8. PEDIDOS → DETALLES_PEDIDO
+   - Relación: 1 a Muchos (Un pedido tiene muchos items)
+   - Foreign Key: order_items.pedido_id → orders.id
+   - ON DELETE: CASCADE (si se elimina un pedido, se eliminan sus items)
+
+9. PRODUCTOS → DETALLES_PEDIDO
+   - Relación: 1 a Muchos (Un producto puede estar en muchos pedidos)
+   - Foreign Key: order_items.producto_id → products.id
+   - NOTA: Se guarda snapshot del precio al momento de la compra
+
+10. DIRECCIONES → PEDIDOS (Envío)
+    - Relación: 1 a Muchos (Una dirección puede usarse en muchos pedidos)
+    - Foreign Key: orders.direccion_envio_id → addresses.id
+
+11. DIRECCIONES → PEDIDOS (Facturación)
+    - Relación: 1 a Muchos (Una dirección puede usarse en muchos pedidos)
+    - Foreign Key: orders.direccion_facturacion_id → addresses.id
+
+12. USUARIOS → CARRITOS (OPCIONAL)
+    - Relación: 1 a 1 (Un usuario tiene un carrito guardado)
+    - Foreign Key: carts.usuario_id → users.id
+    - ON DELETE: CASCADE
+
+================================================================================
+DIAGRAMA DE RELACIONES (TEXTO)
+================================================================================
+
+                    ┌─────────────┐
+                    │   USUARIOS  │
+                    └──────┬──────┘
+                           │
+        ┌───────────────────┼───────────────────┐
+        │                   │                   │
+        ▼                   ▼                   ▼
+┌──────────────┐    ┌──────────────┐    ┌──────────────┐
+│ DIRECCIONES  │    │   PEDIDOS    │    │   CARRITOS   │
+└──────┬───────┘    └──────┬───────┘    └──────────────┘
+       │                   │
+       └───────────┬───────┘
+                   │
+                   ▼
+            ┌──────────────┐
+            │DETALLES_PEDIDO│
+            └──────┬───────┘
+                   │
+                   ▼
+            ┌──────────────┐
+            │  PRODUCTOS   │
+            └──────┬───────┘
+                   │
+        ┌──────────┼──────────┐
+        │          │          │
+        ▼          ▼          ▼
+┌──────────────┐ ┌──────────────┐ ┌──────────────┐
+│IMÁGENES_PROD │ │   OFERTAS    │ │ TESTIMONIOS  │
+└──────────────┘ └──────┬───────┘ └──────────────┘
+                        │
+                        ▼
+                 ┌──────────────┐
+                 │ CATEGORÍAS   │
+                 └──────────────┘
+
+┌──────────────┐
+│REELS_INSTAGRAM│ (Tabla independiente)
+└──────────────┘
+
+================================================================================
+NOTAS IMPORTANTES
+================================================================================
+
+1. TIPOS DE DATOS EN SQLite:
+   - INTEGER: Números enteros
+   - REAL: Números decimales
+   - TEXT: Cadenas de texto
+   - BLOB: Datos binarios (imágenes, etc.)
+   - BOOLEAN: Se almacena como INTEGER (0 o 1)
+   - TIMESTAMP: Se almacena como TEXT o INTEGER (depende de la implementación)
+
+2. VALORES POR DEFECTO:
+   - Los campos con DEFAULT tienen valores automáticos
+   - Los campos NOT NULL son obligatorios
+   - Los campos sin NOT NULL pueden ser NULL
+
+3. CASCADAS:
+   - ON DELETE CASCADE: Si se elimina un registro padre, se eliminan los hijos
+   - Útil para mantener integridad referencial
+
+4. ÍNDICES:
+   - Mejoran el rendimiento de las consultas
+   - Se crean automáticamente para PRIMARY KEY y FOREIGN KEY
+   - Índices adicionales en campos usados frecuentemente en WHERE
+
+5. SEGURIDAD:
+   - Las contraseñas NUNCA se guardan en texto plano
+   - Usar hash (bcrypt, argon2, etc.)
+   - Validar y sanitizar todos los inputs
+
+6. MIGRACIÓN DESDE main.js:
+   - Los productos actuales en PRODUCTS[] se migran a la tabla products
+   - El ID actual (ej: 'A1', 'D2') se mantiene como PRIMARY KEY
+   - Las imágenes se migran a product_images
+
+7. FUTURAS MEJORAS:
+   - Tabla de inventario (movimientos de stock)
+   - Tabla de cupones de descuento
+   - Tabla de wishlist (lista de deseos)
+   - Tabla de reviews/calificaciones detalladas
+   - Tabla de notificaciones
+   - Tabla de sesiones de usuario
+
+================================================================================
+FIN DEL DOCUMENTO
+================================================================================
+

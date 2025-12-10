@@ -565,16 +565,17 @@ function handleLogin(event) {
 	}, 1500);
 }
 
-function handleRegister(event) {
+async function handleRegister(event) {
 	event.preventDefault();
 
-	const name = document.getElementById('registerName').value;
+	const nombre_completo = document.getElementById('registerName').value;
 	const email = document.getElementById('registerEmail').value;
 	const password = document.getElementById('registerPassword').value;
+	const telefono = document.getElementById('registerTelefono')?.value || null;
 
 	// Basic validation
-	if (!name || !email || !password) {
-		showAuthMessage('Por favor, completa todos los campos', 'error');
+	if (!nombre_completo || !email || !password) {
+		showAuthMessage('Por favor, completa todos los campos obligatorios', 'error');
 		return;
 	}
 
@@ -583,48 +584,63 @@ function handleRegister(event) {
 		return;
 	}
 
-	if (password.length < 6) {
-		showAuthMessage('La contraseña debe tener al menos 6 caracteres', 'error');
+	// Validación de contraseña más estricta
+	if (password.length < 8) {
+		showAuthMessage('La contraseña debe tener al menos 8 caracteres', 'error');
 		return;
 	}
 
-	// Simulate registration process
+	if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(password)) {
+		showAuthMessage('La contraseña debe contener al menos una mayúscula, una minúscula y un número', 'error');
+		return;
+	}
+
 	const registerButton = event.target.querySelector('button[type="submit"]');
 	registerButton.disabled = true;
 	registerButton.textContent = 'Creando cuenta...';
 
-	setTimeout(() => {
-		// Simulate successful registration
-		const userData = {
-			name: name,
-			email: email,
-			registerTime: new Date().toISOString()
-		};
+	try {
+		// Llamar a la API
+		const result = await window.authService.register(email, password, nombre_completo, telefono);
 
-		// Store user data in localStorage
-		localStorage.setItem('currentUser', JSON.stringify(userData));
+		if (result.success) {
+			// Update UI
+			updateAuthUI(true, result.user);
 
-		// Update UI
-		updateAuthUI(true, userData);
+			// Close modal
+			closeAuthModal();
 
-		// Close modal
-		closeAuthModal();
+			// Reset form
+			event.target.reset();
 
-		// Reset form
-		event.target.reset();
-
-		// Show success message
-		showAuthMessage(`¡Cuenta creada exitosamente! Bienvenido, ${userData.name}!`);
-
+			// Show success message
+			const displayName = result.user.nombre_completo || result.user.name || result.user.email.split('@')[0];
+			showAuthMessage(`¡Cuenta creada exitosamente! Bienvenido, ${displayName}!`);
+			
+			// Redirigir a página de perfil después de 1.5 segundos
+			setTimeout(() => {
+				window.location.href = 'mi-cuenta.html';
+			}, 1500);
+		} else {
+			showAuthMessage(result.message || 'Error al registrar usuario', 'error');
+		}
+	} catch (error) {
+		console.error('Error en registro:', error);
+		showAuthMessage('Error al conectar con el servidor. Verifica que el backend esté corriendo.', 'error');
+	} finally {
 		// Reset button
 		registerButton.disabled = false;
 		registerButton.textContent = 'Crear Cuenta';
-	}, 1500);
+	}
 }
 
-function handleLogout() {
-	// Remove user data from localStorage
-	localStorage.removeItem('currentUser');
+async function handleLogout() {
+	try {
+		// Cerrar sesión en el servidor
+		await window.authService.logout();
+	} catch (error) {
+		console.error('Error al cerrar sesión:', error);
+	}
 
 	// Update UI
 	updateAuthUI(false);
@@ -634,58 +650,66 @@ function handleLogout() {
 }
 
 function updateAuthUI(isLoggedIn, userData = null) {
-	const authButtons = document.querySelector('.auth-buttons');
-	if (!authButtons) return;
-
+	const authButtons = document.querySelector('.auth-buttons') || document.getElementById('authButtonsContainer');
+	const profileToggle = document.getElementById('profileToggle');
+	
 	if (isLoggedIn && userData) {
-		// Show user menu
-		authButtons.innerHTML = `
-      <div class="user-menu">
-        <button class="btn btn-outline btn-sm user-dropdown-toggle">
-          <span>Hola, ${userData.name}</span>
-          <span style="margin-left: 5px;">▼</span>
-        </button>
-        <div class="user-dropdown" style="display: none;">
-          <a href="#" onclick="showUserProfile()">Mi perfil</a>
-          <a href="#" onclick="showUserOrders()">Mis pedidos</a>
-          <a href="#" onclick="handleLogout()">Cerrar sesión</a>
-        </div>
-      </div>
-    `;
-
-		// Add dropdown functionality
-		const dropdown = authButtons.querySelector('.user-dropdown-toggle');
-		const menu = authButtons.querySelector('.user-dropdown');
-
-		if (dropdown && menu) {
-			dropdown.addEventListener('click', (e) => {
-				e.preventDefault();
-				const isOpen = menu.style.display === 'block';
-				menu.style.display = isOpen ? 'none' : 'block';
-			});
-
-			// Close dropdown when clicking outside
-			document.addEventListener('click', (e) => {
-				if (!authButtons.contains(e.target)) {
-					menu.style.display = 'none';
-				}
-			});
+		// Ocultar botones de auth, el icono de perfil siempre visible
+		if (authButtons) {
+			authButtons.style.display = 'none';
+		}
+		if (profileToggle) {
+			// Configurar click en el icono de perfil para ir a mi-cuenta
+			profileToggle.onclick = () => {
+				window.location.href = 'mi-cuenta.html';
+			};
 		}
 	} else {
-		// Show login/register buttons
-		authButtons.innerHTML = `
-      <button class="btn btn-outline btn-sm" onclick="openLoginModal()">Iniciar Sesión</button>
-      <button class="btn btn-primary btn-sm" onclick="openRegisterModal()">Registrarse</button>
-    `;
+		// Mostrar botones de auth, icono de perfil abre modal de login
+		if (authButtons) {
+			authButtons.style.display = 'flex';
+			authButtons.innerHTML = `
+        <button id="btnLogin" class="btn btn-iniciar-sesion">Iniciar Sesión</button>
+        <button id="btnRegister" class="btn btn-registrarse">Registrarse</button>
+      `;
+		}
+		if (profileToggle) {
+			// Configurar click en el icono de perfil para abrir modal de login
+			profileToggle.onclick = () => {
+				openLoginModal();
+			};
+		}
+		
+		// Reconectar eventos de los botones
+		setupAuthButtons();
 	}
 }
 
 function showUserProfile() {
-	showAuthMessage('Funcionalidad de perfil próximamente disponible');
+	window.location.href = 'mi-cuenta.html';
 }
 
 function showUserOrders() {
-	showAuthMessage('Funcionalidad de pedidos próximamente disponible');
+	window.location.href = 'mi-cuenta.html';
+}
+
+function setupAuthButtons() {
+	const btnLogin = document.getElementById('btnLogin');
+	const btnRegister = document.getElementById('btnRegister');
+	
+	if (btnLogin) {
+		btnLogin.addEventListener('click', (e) => {
+			e.preventDefault();
+			openLoginModal();
+		});
+	}
+	
+	if (btnRegister) {
+		btnRegister.addEventListener('click', (e) => {
+			e.preventDefault();
+			openRegisterModal();
+		});
+	}
 }
 
 function isValidEmail(email) {
@@ -693,15 +717,29 @@ function isValidEmail(email) {
 	return emailRegex.test(email);
 }
 
-function checkAuthStatus() {
-	const userData = localStorage.getItem('currentUser');
-	if (userData) {
+async function checkAuthStatus() {
+	// Verificar si hay token y usuario en localStorage
+	const token = localStorage.getItem('accessToken');
+	const userStr = localStorage.getItem('currentUser');
+	
+	if (token && userStr) {
 		try {
-			const user = JSON.parse(userData);
-			updateAuthUI(true, user);
-		} catch (error) {
-			localStorage.removeItem('currentUser');
+			// Verificar con el servidor que el token sigue siendo válido
+			const user = await window.authService.getCurrentUser();
+			if (user) {
+				updateAuthUI(true, user);
+			} else {
+				// Token inválido, limpiar
+				await window.authService.logout();
+				updateAuthUI(false);
+			}
+		} catch (e) {
+			console.error('Error al verificar autenticación:', e);
+			await window.authService.logout();
+			updateAuthUI(false);
 		}
+	} else {
+		updateAuthUI(false);
 	}
 }
 
@@ -805,6 +843,8 @@ function setupAuthModals() {
 		}
 	});
 	
+	// El icono de perfil se configura en updateAuthUI según el estado de autenticación
+
 	// Verificar estado de autenticación DESPUÉS de configurar los listeners
 	// Esto asegura que los botones reemplazados también funcionen gracias a event delegation
 	checkAuthStatus();
@@ -1562,4 +1602,55 @@ window.changeMainImage = function(imageSrc, index) {
     });
   }
 };
+
+// Inicializar videos de reels de Instagram
+function initReelVideos() {
+  const reelVideos = document.querySelectorAll('.reel-video');
+  
+  reelVideos.forEach(video => {
+    const container = video.closest('.reel-video-container');
+    
+    // Reproducir video cuando está visible en viewport
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          video.play().catch(err => {
+            // Silenciar errores de autoplay (algunos navegadores bloquean autoplay)
+            console.log('Autoplay bloqueado:', err);
+          });
+        } else {
+          video.pause();
+        }
+      });
+    }, {
+      threshold: 0.5 // Reproducir cuando al menos 50% del video es visible
+    });
+    
+    observer.observe(video);
+    
+    // Reproducir al hacer hover
+    container.addEventListener('mouseenter', () => {
+      video.play().catch(err => console.log('Error al reproducir:', err));
+    });
+    
+    // Pausar al salir del hover (opcional)
+    container.addEventListener('mouseleave', () => {
+      // No pausamos para mantener la reproducción continua
+    });
+    
+    // Manejar errores de carga
+    video.addEventListener('error', (e) => {
+      console.warn('Error al cargar video:', video.src);
+      // Ocultar el contenedor si el video no se puede cargar
+      container.style.display = 'none';
+    });
+  });
+}
+
+// Inicializar cuando el DOM esté listo
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initReelVideos);
+} else {
+  initReelVideos();
+}
 
