@@ -302,25 +302,15 @@ function renderFeaturedCarousel() {
 function setupCategories() {
 	const categoryCards = document.querySelectorAll('.category-card');
 	categoryCards.forEach(card => {
-		card.addEventListener('click', () => {
-			const category = card.dataset.category;
-			// Scroll to products section
-			const productsSection = document.getElementById('productos');
-			if (productsSection) {
-				productsSection.scrollIntoView({ behavior: 'smooth' });
+		// Los botones ahora son enlaces, así que no necesitamos el event listener aquí
+		// Pero mantenemos la funcionalidad para cuando se hace click en la tarjeta completa
+		card.addEventListener('click', (e) => {
+			// Si el click fue en el botón/enlace, no hacer nada (dejar que el enlace funcione)
+			if (e.target.closest('a') || e.target.closest('button')) {
+				return;
 			}
-			// Filter products
-			setTimeout(() => {
-				const chips = document.querySelectorAll('.chip');
-				chips.forEach(chip => chip.classList.remove('is-active'));
-				const targetChip = document.querySelector(`[data-filter="${category}"]`);
-				if (targetChip) {
-					targetChip.classList.add('is-active');
-					// Trigger filter
-					const event = new Event('click');
-					targetChip.dispatchEvent(event);
-				}
-			}, 500);
+			const category = card.dataset.category;
+			window.location.href = `tienda.html?categoria=${category}`;
 		});
 	});
 }
@@ -352,6 +342,83 @@ function setupFilters() {
 	});
 	searchInput.addEventListener('input', apply);
 	apply();
+}
+
+// Función para manejar la vista de categoría específica
+function handleCategoryView(category) {
+	// Ocultar la sección de categorías
+	const categoriesSection = document.querySelector('.categories');
+	if (categoriesSection) {
+		categoriesSection.style.display = 'none';
+	}
+	
+	// Ocultar el hero de la tienda original
+	const shopHero = document.querySelector('.shop-hero:not(#categoryHero)');
+	if (shopHero) {
+		shopHero.style.display = 'none';
+	}
+	
+	// Mostrar la sección de productos
+	const productosSection = document.getElementById('productos');
+	if (productosSection) {
+		productosSection.style.display = 'block';
+	}
+	
+	// Ocultar los filtros (chips) y el buscador ya que estamos en una categoría específica
+	const shopControls = document.querySelector('.shop-controls');
+	if (shopControls) {
+		shopControls.style.display = 'none';
+	}
+	
+	// Actualizar el título de la página según la categoría
+	const categoryNames = {
+		'anillos': 'Anillos',
+		'aretes': 'Aretes',
+		'collares': 'Collares',
+		'pulseras': 'Pulseras',
+		'conjuntos': 'Conjuntos',
+		'piedras': 'Piedras'
+	};
+	
+	const categoryName = categoryNames[category] || category;
+	document.title = `${categoryName} – El Xolito Mex`;
+	
+	// Crear un nuevo hero para la categoría
+	const main = document.querySelector('main');
+	const shopSection = document.querySelector('.shop');
+	
+	if (main && shopSection) {
+		// Eliminar hero de categoría anterior si existe
+		const existingCategoryHero = document.getElementById('categoryHero');
+		if (existingCategoryHero) {
+			existingCategoryHero.remove();
+		}
+		
+		// Crear nuevo hero de categoría
+		const categoryHero = document.createElement('section');
+		categoryHero.id = 'categoryHero';
+		categoryHero.className = 'shop-hero';
+		categoryHero.innerHTML = `
+			<div class="container">
+				<h1 class="display">${categoryName}</h1>
+				<p class="lead">Descubre nuestra colección de ${categoryName.toLowerCase()}</p>
+			</div>
+		`;
+		main.insertBefore(categoryHero, shopSection);
+	}
+	
+	// Filtrar y mostrar solo los productos de esa categoría
+	const filteredProducts = PRODUCTS.filter(p => p.category === category);
+	
+	// Renderizar productos filtrados (esto mantiene toda la funcionalidad de las tarjetas)
+	renderProducts(filteredProducts);
+	
+	// Scroll a la sección de productos
+	setTimeout(() => {
+		if (productosSection) {
+			productosSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		}
+	}, 100);
 }
 
 function setupNav() {
@@ -653,35 +720,25 @@ function updateAuthUI(isLoggedIn, userData = null) {
 	const authButtons = document.querySelector('.auth-buttons') || document.getElementById('authButtonsContainer');
 	const profileToggle = document.getElementById('profileToggle');
 	
+	// Siempre ocultar los botones de auth (se muestran en el modal cuando se hace clic en el icono de perfil)
+	if (authButtons) {
+		authButtons.style.display = 'none';
+	}
+	
 	if (isLoggedIn && userData) {
-		// Ocultar botones de auth, el icono de perfil siempre visible
-		if (authButtons) {
-			authButtons.style.display = 'none';
-		}
+		// Usuario autenticado: icono de perfil va a mi-cuenta
 		if (profileToggle) {
-			// Configurar click en el icono de perfil para ir a mi-cuenta
 			profileToggle.onclick = () => {
 				window.location.href = 'mi-cuenta.html';
 			};
 		}
 	} else {
-		// Mostrar botones de auth, icono de perfil abre modal de login
-		if (authButtons) {
-			authButtons.style.display = 'flex';
-			authButtons.innerHTML = `
-        <button id="btnLogin" class="btn btn-iniciar-sesion">Iniciar Sesión</button>
-        <button id="btnRegister" class="btn btn-registrarse">Registrarse</button>
-      `;
-		}
+		// Usuario no autenticado: icono de perfil abre modal de login
 		if (profileToggle) {
-			// Configurar click en el icono de perfil para abrir modal de login
 			profileToggle.onclick = () => {
 				openLoginModal();
 			};
 		}
-		
-		// Reconectar eventos de los botones
-		setupAuthButtons();
 	}
 }
 
@@ -887,12 +944,26 @@ function main() {
 
 	// Check if we're on the shop page
 	if (document.getElementById('productGrid')) {
-		setupFilters();
-		setupCategories();
-		
-		// Check for product parameter in URL
+		// Check for category parameter in URL
 		const urlParams = new URLSearchParams(window.location.search);
+		const categoria = urlParams.get('categoria');
+		const filterParam = urlParams.get('filter'); // Mantener compatibilidad con el parámetro 'filter'
 		const productId = urlParams.get('product');
+		
+		// Si hay un parámetro de categoría, mostrar solo esa categoría
+		if (categoria || filterParam) {
+			const activeCategory = categoria || filterParam;
+			// Configurar filtros y categorías antes de mostrar la vista de categoría
+			setupFilters();
+			setupCategories();
+			handleCategoryView(activeCategory);
+		} else {
+			// Si no hay parámetro de categoría, solo configurar pero no mostrar productos
+			// La sección de productos ya está oculta por defecto en el HTML
+			setupCategories();
+			// No llamamos a setupFilters() porque no queremos mostrar productos todavía
+		}
+		
 		if (productId) {
 			// Wait for products to render, then open the product modal
 			setTimeout(() => {
